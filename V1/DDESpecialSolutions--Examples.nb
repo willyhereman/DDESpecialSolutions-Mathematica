@@ -1,0 +1,242 @@
+(************** Content-type: application/mathematica **************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5998,        180]*)
+(*NotebookOutlinePosition[      6645,        202]*)
+(*  CellTagsIndexPosition[      6601,        198]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(SetDirectory["\<c:\\myDirectory\>"]\)], "Input"],
+
+Cell[BoxData[
+    \(<< DDESpecialSolutions.m\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ Relativistic\ Toda\ Equation\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t]\ , 
+            t]\  \[Equal] \ \((1 + alpha*u[n, t])\)*\((v[n, t] - 
+                v[n - 1, t])\), \ 
+        D[v[n, t], \ t]\  \[Equal] \ 
+          v[n, t]*\((u[n + 1, t] - u[n, t] + alpha*v[n + 1, t] - 
+                alpha*v[n - 1, t])\)}, \ {u[n, t], v[n, t]}, {n, 
+        t}, {alpha}]\)], "Input"],
+
+Cell["\<\
+These solutions are not being tested numerically or symbolically.  To test \
+the solutions set either the NumericTest option to True, or set the \
+SymbolicTest option to True, or both. \
+\>", "Message"],
+
+Cell["\<\
+{{{u[n, t] -> -((1 + alpha*c[2]*Coth[c[1]] - alpha*c[2]*Tanh[phase + n*c[1] + \
+t*c[2]])/alpha), 
+   v[n, t] -> (c[2]*(Coth[c[1]] - Tanh[phase + n*c[1] + t*c[2]]))/alpha}}, \
+{}}\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"DDESpecialSolutions", "[", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{
+              RowBox[{
+                SuperscriptBox["u", 
+                  TagBox[\((0, 1)\),
+                    Derivative],
+                  MultilineFunction->None], "[", \(n, t\), "]"}], 
+              "==", \(\((1 + alpha\ u[n, t])\)\ \((\(-v[\(-1\) + n, t]\) + 
+                    v[n, t])\)\)}], ",", 
+            RowBox[{
+              RowBox[{
+                SuperscriptBox["v", 
+                  TagBox[\((0, 1)\),
+                    Derivative],
+                  MultilineFunction->None], "[", \(n, t\), "]"}], 
+              "==", \(v[n, 
+                  t]\ \((\(-u[n, t]\) + u[1 + n, t] - 
+                    alpha\ v[\(-1\) + n, t] + alpha\ v[1 + n, t])\)\)}]}], 
+          "}"}], ",", \({u[n, t], v[n, t]}\), ",", \({n, t}\), 
+        ",", \({alpha}\)}], "]"}]], "Input"],
+
+Cell["\<\
+These solutions are not being tested numerically or symbolically.  To test \
+the solutions set either the NumericTest option to True, or set the \
+SymbolicTest option to True, or both. \
+\>", "Message"],
+
+Cell["\<\
+{{{u[n, t] -> -((1 + alpha*c[2]*Coth[c[1]] - alpha*c[2]*Tanh[phase + n*c[1] + \
+t*c[2]])/alpha), 
+   v[n, t] -> (c[2]*(Coth[c[1]] - Tanh[phase + n*c[1] + t*c[2]]))/alpha}}, \
+{}}\
+\>", "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ Volterra\ Lattice\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], \ t]\  \[Equal] \ 
+          u[n, t]*\((v[n, t] - v[n - 1, t])\), \ 
+        D[v[n, t], \ t]\  \[Equal] \ 
+          v[n, t]*\((u[n + 1, t] - u[n, t])\)}, \ {u[n, t], \ v[n, t]}, \ {n, 
+        t}, \ {}]\)], "Input"],
+
+Cell["\<\
+These solutions are not being tested numerically or symbolically.  To test \
+the solutions set either the NumericTest option to True, or set the \
+SymbolicTest option to True, or both. \
+\>", "Message"],
+
+Cell["\<\
+{{{u[n, t] -> -(c[2]*(Coth[c[1]] - Tanh[phase + n*c[1] + t*c[2]])), 
+   v[n, t] -> -(c[2]*(Coth[c[1]] + Tanh[phase + n*c[1] + t*c[2]]))}}}\
+\>", "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ Schrodinger\ System\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], t] - 
+            alpha*\((u[n + 1, t] - 2*u[n, t] + u[n - 1, t])\) - 
+            u[n, t]*v[n, t]*\((u[n + 1, t] + u[n - 1, t])\) \[Equal] 0, \ 
+        D[v[n, t], t] + alpha*\((v[n + 1, t] - 2*v[n, t] + v[n - 1, t])\) + 
+            u[n, t]*v[n, t]*\((v[n + 1, t] + v[n - 1, t])\) \[Equal] 0}, \ {u[
+          n, t], \ v[n, t]}, \ {n, t}, \ {alpha}]\)], "Input"],
+
+Cell["\<\
+These solutions are not being tested numerically or symbolically.  To test \
+the solutions set either the NumericTest option to True, or set the \
+SymbolicTest option to True, or both. \
+\>", "Message"],
+
+Cell["\<\
+{{{u[n, t] -> -((alpha*Sinh[c[1]]^2*(-1 + Tanh[phase + n*c[1] - \
+2*alpha*t*Sinh[c[1]]^2]))/
+      a[2, 1]), v[n, t] -> a[2, 1]*(1 + Tanh[phase + n*c[1] - \
+2*alpha*t*Sinh[c[1]]^2])}, 
+  {u[n, t] -> -((alpha*Sinh[c[1]]^2*(1 + Tanh[phase + n*c[1] + \
+2*alpha*t*Sinh[c[1]]^2]))/a[2, 1]), 
+   v[n, t] -> a[2, 1]*(-1 + Tanh[phase + n*c[1] + 2*alpha*t*Sinh[c[1]]^2])}}}\
+\
+\>", "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"4.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1365}, {0, 977}},
+WindowSize->{787, 695},
+WindowMargins->{{Automatic, 268}, {Automatic, 110}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1705, 50, 68, 1, 30, "Input"],
+Cell[1776, 53, 57, 1, 30, "Input"],
+Cell[1836, 56, 71, 1, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[1932, 61, 359, 7, 70, "Input"],
+Cell[2294, 70, 212, 4, 40, "Message"],
+Cell[2509, 76, 204, 5, 60, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2750, 86, 932, 23, 73, "Input"],
+Cell[3685, 111, 212, 4, 40, "Message"],
+Cell[3900, 117, 204, 5, 60, "Output"]
+}, Open  ]],
+Cell[4119, 125, 60, 1, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[4204, 130, 268, 5, 50, "Input"],
+Cell[4475, 137, 212, 4, 40, "Message"],
+Cell[4690, 143, 164, 3, 60, "Output"]
+}, Open  ]],
+Cell[4869, 149, 62, 1, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[4956, 154, 416, 6, 90, "Input"],
+Cell[5375, 162, 212, 4, 40, "Message"],
+Cell[5590, 168, 392, 9, 94, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,385 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     11373,        310]*)
+(*NotebookOutlinePosition[     12057,        333]*)
+(*  CellTagsIndexPosition[     12013,        329]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \( (*\ Last\ modified\ by\ Hereman\ on\ Thursday, \ June\ 8, \ 
+      2006\ at\ 15 : 30\ *) \)], "Input"],
+
+Cell[BoxData[
+    \( (*\ 
+      Set\ the\ location\ with\ the\ SetDirectory\ command . \ \
+\[IndentingNewLine]For\ example, \ 
+      if\ the\ saved\ the\ software\ in\ the\ directory\ \
+demoddespecialsolutions\ on\ drive\ D, \ use\ *) \)], "Input"],
+
+Cell[BoxData[
+    \(SetDirectory["\<d:\\demoddespecialsolutions\>"]\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ Then\ load\ the\ package\ DDESpecialSolutionsV2 . 
+          m\ with\ the\ Get\ command\ as\ follows\ *) \)], "Input"],
+
+Cell[BoxData[
+    \(Get["\<DDESpecialSolutionsV2.m\>"]\)], "Input"],
+
+Cell[BoxData[
+    \(?? \ DDESpecialSolutions\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ In\ difficult\ cases, \ 
+      there\ may\ be\ freedom\ in\ the\ choice\ of\ the\ degree\ of\ the\ \
+polynomial\ solution . \ Thus, \ 
+      the\ software\ investigates\ all\ the\ possible\ solutions\ between\ \
+MinDegreeOfThePolynomial\ and\ \(\(MaxDegreeOfThePolynomial\)\(.\)\)\ \ *) \
+\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ Single\ Toda\ Lattice\ *) \)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[
+            u[n, t], \ {t, 
+              2}]\  \[Equal] \ \((1 + D[u[n, t], \ t])\)*\((u[n - 1, t] - 
+                2*u[n, t] + 
+                u[n + 1, t])\)}, {u}, \ {n}, {t}, \ {}]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\( (*\ 
+      Toda\ as\ System\ of\ First - order\ *) \)\(\[IndentingNewLine]\)\( (*\ 
+      Use\ the\ Verbose \[Rule] True, \ 
+      option\ to\ see\ a\ trace\ of\ the\ steps\ of\ the\ \
+\(\(algorithm\)\(.\)\)\ *) \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], t] - v[n, t] \[Equal] 0, \ 
+        D[v[n, t], 
+              t] - \((1 + v[n, t])\)*\((u[n - 1, t] - 2*u[n, t] + 
+                  u[n + 1, t])\) \[Equal] 0}, \ {u, \ v}, \ {n}, {t}, \ {}, 
+      Verbose\  \[Rule] \ True]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\( (*\ 
+      Relativistic\ Toda\ Equation\ *) \)\(\[IndentingNewLine]\)\( (*\ 
+      To\ use\ the\ symbolic\ test, \ 
+      use\ the\ SymbolicTest \[Rule] 
+        True\ \(\(option\)\(.\)\)\ *) \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t]\ , 
+            t]\  \[Equal] \ \((1 + alpha*u[n, t])\)*\((v[n, t] - 
+                v[n - 1, t])\), \ 
+        D[v[n, t], \ t]\  \[Equal] 
+          v[n, t]*\((u[n + 1, t] - u[n, t] + alpha*v[n + 1, t] - 
+                alpha*v[n - 1, t])\)}, \ {u, v}, {n}, {t}, {alpha}, 
+      SymbolicTest \[Rule] True]\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ To\ force\ the\ function\ to\ use\ your\ choice\ of\ ansatz, \ 
+      use\ the\ DegreeOfThePolynomial\ \(\(option\)\(.\)\)\ *) \)], "Input"],
+
+Cell[BoxData[
+    RowBox[{"DDESpecialSolutions", "[", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{
+              RowBox[{
+                SuperscriptBox["u", 
+                  TagBox[\((0, 1)\),
+                    Derivative],
+                  MultilineFunction->None], "[", \(n, t\), "]"}], 
+              "==", \(\((1 + alpha\ u[n, t])\)\ \((\(-v[\(-1\) + n, t]\) + 
+                    v[n, t])\)\)}], ",", 
+            RowBox[{
+              RowBox[{
+                SuperscriptBox["v", 
+                  TagBox[\((0, 1)\),
+                    Derivative],
+                  MultilineFunction->None], "[", \(n, t\), "]"}], 
+              "==", \(v[n, 
+                  t]\ \((\(-u[n, t]\) + u[1 + n, t] - 
+                    alpha\ v[\(-1\) + n, t] + alpha\ v[1 + n, t])\)\)}]}], 
+          "}"}], ",", \({u, v}\), ",", \({n}\), ",", \({t}\), 
+        ",", \({alpha}\), ",", 
+        " ", \(DegreeOfThePolynomial \[Rule] {m[1] \[Rule] 1, 
+            m[2] \[Rule] 1}\)}], "]"}]], "Input"],
+
+Cell[BoxData[
+    \( (*\ Volterra\ Lattice\ *) \)], "Input"],
+
+Cell[BoxData[
+    \( (*\ To\ get\ the\ output\ in\ a\ copyable\ form, \ 
+      use\ the\ InputForm \[Rule] True\ \(\(option\)\(.\)\)\ *) \)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], \ t]\  \[Equal] \ 
+          u[n, t]*\((v[n, t] - v[n - 1, t])\), \ 
+        D[v[n, t], \ t]\  \[Equal] \ 
+          v[n, t]*\((u[n + 1, t] - u[n, t])\)}, \ {u, \ 
+        v}, \ {n}, {t}, \ {}, \ InputForm \[Rule] True]\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ 
+      If\ you\ would\ like\ to\ solve\ the\ algebraic\ system\ using\ other\ \
+software, \ 
+      use\ the\ SolveAlgebraicSystem \[Rule] 
+        False\ \(\(option\)\(.\)\)\ *) \)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], \ t]\  \[Equal] \ 
+          u[n, t]*\((v[n, t] - v[n - 1, t])\), \ 
+        D[v[n, t], \ t]\  \[Equal] \ 
+          v[n, t]*\((u[n + 1, t] - u[n, t])\)}, \ {u, \ 
+        v}, \ {n}, {t}, \ {}, \ 
+      SolveAlgebraicSystem \[Rule] False]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\( (*A\ new\ integrable\ system\ related\ to\ the\ relativistic\ Toda\
+\ lattice*) \)\(\[IndentingNewLine]\)\( (*Ref : Suris, 
+      J . Phys . A . 30\ \((1997)\)\ 1745*) \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], 
+            t] \[Equal] \((u[n + 1, t] - v[n, t])\)*
+              v[n, t] - \((u[n - 1, t] - v[n - 1, t])\)*v[n - 1, t], 
+        D[v[n, t], t] \[Equal] v[n, t]*\((u[n + 1, t] - u[n, t])\)}, {u, \ 
+        v}, {n}, {t}, {}]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\( (*On\ some\ integrable\ systems\ related\ to\ the\ Toda\ lattice\
+*) \)\(\[IndentingNewLine]\)\( (*Ref : Suris, 
+      J . Phys . A . 30\ \((1997)\)\ 2235*) \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], t] \[Equal] 
+          u[n, t]*\((v[n, t] - v[n - 1, t])\), 
+        D[v[n, t], t] \[Equal] v[n, t]*\((u[n + 1, t] - u[n, t])\)}, {u, 
+        v}, {n}, {t}, {}]\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ Schrodinger\ System\ *) \)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], t] - 
+            alpha*\((u[n + 1, t] - 2*u[n, t] + u[n - 1, t])\) - 
+            u[n, t]*v[n, t]*\((u[n + 1, t] + u[n - 1, t])\) \[Equal] 0, 
+        D[v[n, t], t] + alpha*\((v[n + 1, t] - 2*v[n, t] + v[n - 1, t])\) + 
+            u[n, t]*v[n, t]*\((v[n + 1, t] + v[n - 1, t])\) \[Equal] 
+          0}, {u, \ v}, \ {n}, {t}, \ {alpha}]\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ Ablowitz - 
+        Ladik\ Discretization\ of\ NLS\ Equation\ *) \)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], \ t]\  \[Equal] \ 
+          aa*\((u[n + 1, t] - 2*u[n, t] + u[n - 1, t])\) + 
+            u[n, t]*v[n, t]*\((u[n + 1, t] + u[n - 1, t])\), 
+        D[v[n, t], 
+            t]\  == \(-aa\)*\((v[n + 1, t] - 2*v[n, t] + v[n - 1, t])\) - 
+            u[n, t]*v[n, t]*\((v[n + 1, t] + v[n - 1, t])\)}, {u, \ 
+        v}, {n}, {t}, {aa}]\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ NLS\ Equation\ \((Ablowitz - 
+            Ladik\ Discretization)\)\ *) \)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], t]\  == 
+          aa*\((bb*u[n + 1, t] - 2*bb*u[n, t] + bb*u[n - 1, t])\) + 
+            u[n, t]*v[n, t]*\((bb*u[n + 1, t] + bb*u[n - 1, t])\), 
+        D[v[n, t], 
+            t]\  == \(-aa\)*\((bb*v[n + 1, t] - 2*bb*v[n, t] + 
+                  bb*v[n - 1, t])\) - 
+            u[n, t]*v[n, t]*\((bb*v[n + 1, t] + bb*v[n - 1, t])\)}, {u, 
+        v}, {n}, {t}, {aa, bb}]\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ Modified\ KdV\ Equation\ \((with\ parameter)\)\ *) \)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[
+      D[u[n, t], 
+          t] \[Equal] \((aa^2 - u[n, t]^2)\)*\((u[n + 1, t] - u[n - 1, t])\), 
+      u, {n}, {t}, {aa}]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\( (*\ 1 - D\ Volterra\ system*) \)\(\[IndentingNewLine]\)\( (*\ 
+      On\ the\ Dynamics\ of\ Rational\ Solutions\ for\ 1  
+        D\ Volterra\ System\ by\ A . S . 
+          Carstea\ in\ SIDE\ \(\(III\)\(.\)\)\ *) \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[q[n, t], 
+            t]\  \[Equal] \ \((a + b*q[n, t] - 
+                c*q[n, t]^2)\)*\((r[n + 1, t]\  - \ r[n - 1, t])\), 
+        D[r[n, t], \ 
+            t]\  \[Equal] \ \((a + b*r[n, t]\  - \ 
+                c*r[n, t]^2)\)*\((q[n + 1, t] - q[n - 1, t])\)}, {q, 
+        r}, {n}, {t}, {a, b, c}]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\( (*\ 
+      Self - dual\ nonlinear\ network\ equation\ *) \)\(\[IndentingNewLine]\)\
+\( (*\ Time - 
+        discretization\ of\ soliton\ equations\ by\ Ryogo\ Hirota\ and\ \
+masataka\ Iwao\ in\ SIDE\ \(\(III\)\(.\)\)\ *) \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[
+      D[v[n, t], 
+          t]\  \[Equal] \ \((1 - v[n, t]^2)\)*\((v[n - 1, t]\  - \ 
+              v[n + 1, t])\), v, n, t, {}]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\( (*\ Hybrid\ Equation\ *) \)\(\[IndentingNewLine]\)\( (*\ 
+      Time - discretization\ of\ soliton\ equations\ by\ Ryogo\ Hirota\ and\ \
+masataka\ Iwao\ in\ SIDE\ \(\(III\)\(.\)\)\ *) \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[
+      D[w[n, t], 
+          t]\  \[Equal] \ \((1 + b*w[n, t] + 
+              c*w[n, t]^2)\)*\((w[n - 1, t]\  - \ w[n + 1, t])\), w, n, 
+      t, {b, c}]\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ \((1 + 2)\)\ Toda\ lattices\ *) \)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[
+      D[s[n, x, t], \ x, 
+          t]\  \[Equal] \ \((s[n - 1, x, t]\  - \ 2*s[n, x, t] + 
+              s[n + 1, x, t])\)*\((D[s[n, x, t], t]\  + \ 1)\), s, 
+      n, \ {x, \ t}, {}]\)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, x, t], \ t]\  \[Equal] \ v[n, x, t], 
+        D[v[n, x, t], \ 
+            x]\  \[Equal] \ \((u[n - 1, x, t]\  - \ 2*u[n, x, t] + 
+                u[n + 1, x, t])\)*\((v[n, x, t]\  + \ 1)\)}, {u, v}, 
+      n, \ {x, \ t}, {}]\)], "Input"]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Presentation",
+WindowSize->{1272, 907},
+WindowMargins->{{0, Automatic}, {Automatic, 0}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 123, 2, 38, "Input"],
+Cell[1880, 55, 248, 5, 61, "Input"],
+Cell[2131, 62, 80, 1, 38, "Input"],
+Cell[2214, 65, 143, 2, 38, "Input"],
+Cell[2360, 69, 67, 1, 38, "Input"],
+Cell[2430, 72, 57, 1, 38, "Input"],
+Cell[2490, 75, 327, 6, 84, "Input"],
+Cell[2820, 83, 64, 1, 38, "Input"],
+Cell[2887, 86, 244, 5, 61, "Input"],
+Cell[3134, 93, 254, 5, 61, "Input"],
+Cell[3391, 100, 288, 5, 61, "Input"],
+Cell[3682, 107, 234, 5, 61, "Input"],
+Cell[3919, 114, 372, 7, 84, "Input"],
+Cell[4294, 123, 165, 2, 38, "Input"],
+Cell[4462, 127, 1031, 25, 87, "Input"],
+Cell[5496, 154, 60, 1, 38, "Input"],
+Cell[5559, 157, 150, 2, 38, "Input"],
+Cell[5712, 161, 284, 5, 61, "Input"],
+Cell[5999, 168, 216, 5, 61, "Input"],
+Cell[6218, 175, 303, 6, 61, "Input"],
+Cell[6524, 183, 210, 3, 61, "Input"],
+Cell[6737, 188, 290, 5, 61, "Input"],
+Cell[7030, 195, 199, 3, 61, "Input"],
+Cell[7232, 200, 225, 4, 61, "Input"],
+Cell[7460, 206, 62, 1, 38, "Input"],
+Cell[7525, 209, 402, 6, 107, "Input"],
+Cell[7930, 217, 103, 2, 38, "Input"],
+Cell[8036, 221, 397, 7, 84, "Input"],
+Cell[8436, 230, 109, 2, 38, "Input"],
+Cell[8548, 234, 438, 8, 107, "Input"],
+Cell[8989, 244, 89, 1, 38, "Input"],
+Cell[9081, 247, 175, 4, 38, "Input"],
+Cell[9259, 253, 256, 4, 61, "Input"],
+Cell[9518, 259, 359, 7, 107, "Input"],
+Cell[9880, 268, 262, 5, 84, "Input"],
+Cell[10145, 275, 182, 4, 61, "Input"],
+Cell[10330, 281, 226, 3, 84, "Input"],
+Cell[10559, 286, 207, 5, 84, "Input"],
+Cell[10769, 293, 70, 1, 38, "Input"],
+Cell[10842, 296, 238, 5, 84, "Input"],
+Cell[11083, 303, 286, 5, 84, "Input"]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

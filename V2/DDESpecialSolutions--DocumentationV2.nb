@@ -1,0 +1,2917 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[    105544,       2525]*)
+(*NotebookOutlinePosition[    106537,       2558]*)
+(*  CellTagsIndexPosition[    106447,       2552]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \( (*\ Last\ modified\ by\ Hereman\ on\ Saturday, \ January\ 24, \ 
+      2009\ at\ 18 : 00\ *) \)], "Input"],
+
+Cell[BoxData[
+    \( (*\ 
+      Set\ the\ location\ with\ the\ SetDirectory\ command . \ \
+\[IndentingNewLine]For\ example, \ 
+      if\ the\ saved\ the\ software\ in\ the\ directory\ \
+demoddespecialsolutions\ on\ drive\ d, \ use\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SetDirectory["\<d:\\demoddespecialsolutions\>"]\)], "Input"],
+
+Cell[BoxData[
+    \("d:\\demoddespecialsolutions"\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ Then\ load\ the\ package\ DDESpecialSolutionsV2 . 
+          m\ with\ the\ Get\ command\ as\ follows\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(Get["\<DDESpecialSolutionsV2.m\>"]\)\(\ \)\)\)], "Input"],
+
+Cell[BoxData[
+    \("Package DDESpecialSolutionsV2.m was successfully loaded."\)], "Print"],
+
+Cell[BoxData[
+    \("Version 2 was last updated: Friday, January 23, 2009 by Hereman."\)], \
+"Print"],
+
+Cell[BoxData[
+    \("Version 1 was first released on July 23, 2004."\)], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(?? \ DDESpecialSolutions\)], "Input"],
+
+Cell[BoxData[
+    \("DDESpecialSolutions[eqns, funcs, dvars, cvars, params, opts] solves a \
+system of nonlinear differential-difference equations for funcs, with \
+continuous independent variables cvars ({x,y,z,...}), discrete independent \
+variables dvars ({n,m,...}) and non-zero parameters params in terms of \
+hyperbolic tangent functions."\)], "Print",
+  CellTags->"Info3441887448-8744311"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(Attributes[DDESpecialSolutions] = {ReadProtected}\)},
+          {" "},
+          {GridBox[{
+                {\(Options[DDESpecialSolutions] = {Verbose \[Rule] False, 
+                      "InputForm" \[Rule] False, NumericTest \[Rule] True, 
+                      SymbolicTest \[Rule] True, 
+                      DegreeOfThePolynomial \[Rule] {}, 
+                      MinDegreeOfThePolynomial \[Rule] 1, 
+                      MaxDegreeOfThePolynomial \[Rule] 3, 
+                      SolveAlgebraicSystem \[Rule] True}\)}
+                },
+              GridBaseline->{Baseline, {1, 1}},
+              ColumnWidths->0.999,
+              ColumnAlignments->{Left}]}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      Definition[ "DDESpecialSolutions"],
+      Editable->False]], "Print",
+  CellTags->"Info3441887448-8744311"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ In\ difficult\ cases, \ 
+      there\ may\ be\ freedom\ in\ the\ choice\ of\ the\ degree\ of\ the\ \
+polynomial\ solution . \ Thus, \ 
+      the\ software\ investigates\ all\ the\ possible\ solutions\ between\ \
+MinDegreeOfThePolynomial\ and\ \(\(MaxDegreeOfThePolynomial\)\(.\)\)\ \ *) \
+\)], "Input"],
+
+Cell[BoxData[
+    \( (*\ Single\ Toda\ equation\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[
+            u[n, t], \ {t, 
+              2}]\  \[Equal] \ \((1 + D[u[n, t], \ t])\)*\((u[n - 1, t] - 
+                2*u[n, t] + 
+                u[n + 1, t])\)}, {u}, \ {n}, {t}, \ {}]\)], "Input"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell["\<\
+The following simplification rules are being used to test the solutions: \
+{Sqrt[a^2]->a}\
+\>", "Message"],
+
+Cell[BoxData[
+    \({{{u[n, t] \[Rule] 
+            a[1, 0] - Sinh[c[1]]\ Tanh[phase + n\ c[1] - t\ Sinh[c[1]]]}, {u[
+              n, t] \[Rule] 
+            a[1, 0] + 
+              Sinh[c[1]]\ Tanh[
+                  phase + n\ c[1] + t\ Sinh[c[1]]]}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(\( (*\ 
+      Toda\ equation\ as\ a\ system\ of\ first - 
+        order\ *) \)\(\[IndentingNewLine]\)\( (*\ 
+      Use\ the\ Verbose\  \[Rule] \ True, \ 
+      option\ to\ see\ a\ trace\ of\ the\ steps\ of\ the\ \
+\(\(algorithm\)\(.\)\)\ *) \)\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], t] - v[n, t] \[Equal] 0, \ 
+        D[v[n, t], 
+              t] - \((1 + v[n, t])\)*\((u[n - 1, t] - 2*u[n, t] + 
+                  u[n + 1, t])\) \[Equal] 0}, \ {u, \ v}, \ {n}, {t}, \ {}, 
+      Verbose\  \[Rule] \ True]\)], "Input"],
+
+Cell[BoxData[
+    \("The given system of differential-difference equations: "\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{
+            InterpretationBox[
+              RowBox[{"u", "\[InvisibleSpace]", 
+                InterpretationBox[
+                  SubscriptBox["\[Null]", 
+                    
+                    InterpretationBox[\(n\[InvisibleSpace]";"\[InvisibleSpace]\
+t\),
+                      SequenceForm[ n, ";", t],
+                      Editable->False]],
+                  Subscript[ 
+                    SequenceForm[ n, ";", t]],
+                  Editable->False]}],
+              SequenceForm[ u, 
+                Subscript[ 
+                  SequenceForm[ n, ";", t]]],
+              Editable->False], "-", \(v\_n\)}], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[
+              RowBox[{"v", "\[InvisibleSpace]", 
+                InterpretationBox[
+                  SubscriptBox["\[Null]", 
+                    
+                    InterpretationBox[\(n\[InvisibleSpace]";"\[InvisibleSpace]\
+t\),
+                      SequenceForm[ n, ";", t],
+                      Editable->False]],
+                  Subscript[ 
+                    SequenceForm[ n, ";", t]],
+                  Editable->False]}],
+              SequenceForm[ v, 
+                Subscript[ 
+                  SequenceForm[ n, ";", t]]],
+              Editable->False], 
+            "-", \(\((u\_\(\(-1\) + n\) - 2\ u\_n + u\_\(1 + n\))\)\ \((1 + 
+                  v\_n)\)\)}], "\[Equal]", "0"}]}], "}"}]], "Print"],
+
+Cell[BoxData[
+    \("Transform the system of differential-difference equations into \
+nonlinear DDEs in T = Tanh."\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{\(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], "-", 
+          RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], 
+          "-", \(\(\(u[2]\)[n]\)[T]\)}], ",", 
+        RowBox[{
+          RowBox[{\(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[2]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], "-", 
+          RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[2]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], 
+          "-", \(\(\(u[1]\)[\(-1\) + n]\)[T]\), 
+          "+", \(2\ \(\(u[1]\)[n]\)[T]\), "-", \(\(\(u[1]\)[1 + n]\)[T]\), 
+          "-", \(\(\(u[1]\)[\(-1\) + n]\)[T]\ \(\(u[2]\)[n]\)[T]\), 
+          "+", \(2\ \(\(u[1]\)[n]\)[T]\ \(\(u[2]\)[n]\)[T]\), 
+          "-", \(\(\(u[1]\)[1 + n]\)[T]\ \(\(u[2]\)[n]\)[T]\)}]}], 
+      "}"}]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.09999999999999964`\),
+      SequenceForm[ "Time Used:", .099999999999999645],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Determine the maximal degree of the polynomial solutions in T."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(DDESpecialSolutionsmSolver::"remove" \(\(:\)\(\ \)\) 
+      "The potential solutions \!\({\({\(\(\(\(m[1]\)\) \[Rule] \
+\(\(-1\)\)\)\), \(\(\(\(m[2]\)\) \[Rule] 0\)\)}\)}\) are being removed \
+because they are (i) negative, (ii) contain freedom, (iii) fail to balance \
+highest exponent terms from two different terms in the original system.  If \
+\!\(M\_i\) < 0, then the transformation u -> 1/v may result in a system that \
+DDESpecialSolutions can solve."\)], "Message"],
+
+Cell[BoxData[
+    \(DDESpecialSolutionsmSolver::"remove" \(\(:\)\(\ \)\) 
+      "The potential solutions \!\({\({\(\(\(\(m[1]\)\) \[Rule] \
+\(\(-1\)\)\)\), \(\(\(\(m[2]\)\) \[Rule] 0\)\)}\)}\) are being removed \
+because they are (i) negative, (ii) contain freedom, (iii) fail to balance \
+highest exponent terms from two different terms in the original system.  If \
+\!\(M\_i\) < 0, then the transformation u -> 1/v may result in a system that \
+DDESpecialSolutions can solve."\)], "Message"],
+
+Cell[BoxData[
+    \({{m[1] \[Rule] 1, m[2] \[Rule] 2}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]1.0110000000000001`\),
+      SequenceForm[ "Time Used:", 1.0110000000000001],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Derive the nonlinear algebraic system for the coefficients."\)], \
+"Print"],
+
+Cell[BoxData[
+    \("Seek polynomial solutions in T of the form:"\)], "Print"],
+
+Cell[BoxData[
+    \({{\(\(u[1]\)[n]\)[T] \[Rule] 
+          a[1, 0] + T\ a[1, 1], \(\(u[2]\)[n]\)[T] \[Rule] 
+          a[2, 0] + T\ a[2, 1] + T\^2\ a[2, 2]}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("where T = Tanh["\[InvisibleSpace]\(phase + n\ c[1] + 
+          t\ c[2]\)\[InvisibleSpace]"]."\),
+      SequenceForm[ "where T = Tanh[", 
+        Plus[ phase, 
+          Times[ n, 
+            c[ 1]], 
+          Times[ t, 
+            c[ 2]]], "]."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("The nonlinear algebraic system is: "\)], "Print"],
+
+Cell[BoxData[
+    \({{{a[2, 1] \[Equal] 0, a[2, 2] + a[1, 1]\ c[2] \[Equal] 0, 
+          a[2, 0] - a[1, 1]\ c[2] \[Equal] 0, 
+          a[2, 1]\ \((2\ a[1, 1] - c[2])\) \[Equal] 0, 
+          a[1, 1] - c[2] \[Equal] 0, a[2, 1] \[Equal] 0, 
+          a[2, 2]\ c[2] + a[1, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\ a[2, 0]\ Tanh[c[1]]\^2 \[Equal] 0, 
+          a[2, 1]\ \((c[2] - 2\ a[1, 1]\ Tanh[c[1]]\^2 + 
+                  c[2]\ Tanh[c[1]]\^2)\) \[Equal] 0, 
+          a[2, 2]\ c[2] + a[1, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\ a[2, 0]\ Tanh[c[1]]\^2 - 
+              a[1, 1]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              a[2, 2]\ c[2]\ Tanh[c[1]]\^2 \[Equal] 0}, {a[2, 2], a[2, 1], 
+          a[1, 1], a[2, 0], a[1, 0]}, {Tanh[c[1]], c[2]}, {}, {a[1, 1], 
+          a[2, 2], Tanh[c[1]], c[2]}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.29100000000000037`\),
+      SequenceForm[ "Time Used:", .29100000000000037],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Solve the nonlinear algebraic system."\)], "Print"],
+
+Cell[BoxData[
+    \({{{a[2, 1] \[Rule] 0, 
+          a[1, 1] \[Rule] \(-\(Tanh[c[1]]\/\@\(1 - Tanh[c[1]]\^2\)\)\), 
+          a[2, 0] \[Rule] Sinh[c[1]]\^2, a[2, 2] \[Rule] \(-Sinh[c[1]]\^2\), 
+          c[2] \[Rule] \(-\(Tanh[c[1]]\/\@\(1 - Tanh[c[1]]\^2\)\)\)}, {a[2, 
+              1] \[Rule] 0, 
+          a[1, 1] \[Rule] Tanh[c[1]]\/\@\(1 - Tanh[c[1]]\^2\), 
+          a[2, 0] \[Rule] Sinh[c[1]]\^2, a[2, 2] \[Rule] \(-Sinh[c[1]]\^2\), 
+          c[2] \[Rule] Tanh[c[1]]\/\@\(1 - Tanh[c[1]]\^2\)}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.6809999999999992`\),
+      SequenceForm[ "Time Used:", .68099999999999916],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Build and test the travelling wave solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("The possible non-trivial solutions (before any testing): "\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, t] \[Rule] 
+            a[1, 0] - Sinh[c[1]]\ Tanh[phase + n\ c[1] - t\ Sinh[c[1]]], 
+          v[n, t] \[Rule] \(-Sinh[c[1]]\^2\)\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] - t\ Sinh[c[1]]])\)\ \((1 + 
+                  Tanh[phase + n\ c[1] - t\ Sinh[c[1]]])\)}, {u[n, t] \[Rule] 
+            a[1, 0] + Sinh[c[1]]\ Tanh[phase + n\ c[1] + t\ Sinh[c[1]]], 
+          v[n, t] \[Rule] \(-Sinh[c[1]]\^2\)\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] + t\ Sinh[c[1]]])\)\ \((1 + 
+                  Tanh[phase + n\ c[1] + t\ Sinh[c[1]]])\)}}}\)], "Print"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell["\<\
+The following simplification rules are being used to test the solutions: \
+{Sqrt[a^2]->a}\
+\>", "Message"],
+
+Cell[BoxData[
+    \({{{u[n, t] \[Rule] 
+            a[1, 0] - Sinh[c[1]]\ Tanh[phase + n\ c[1] - t\ Sinh[c[1]]], 
+          v[n, t] \[Rule] \(-Sinh[c[1]]\^2\)\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] - t\ Sinh[c[1]]])\)\ \((1 + 
+                  Tanh[phase + n\ c[1] - t\ Sinh[c[1]]])\)}, {u[n, t] \[Rule] 
+            a[1, 0] + Sinh[c[1]]\ Tanh[phase + n\ c[1] + t\ Sinh[c[1]]], 
+          v[n, t] \[Rule] \(-Sinh[c[1]]\^2\)\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] + t\ Sinh[c[1]]])\)\ \((1 + 
+                  Tanh[phase + n\ c[1] + t\ Sinh[c[1]]])\)}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]11.266`\),
+      SequenceForm[ "Time Used:", 11.266],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \(\*"\<\"\"\>"\)], "Print"],
+
+Cell[BoxData[
+    \("The (numerically and/or symbolically) tested solutions:"\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, t] \[Rule] 
+            a[1, 0] - Sinh[c[1]]\ Tanh[phase + n\ c[1] - t\ Sinh[c[1]]], 
+          v[n, t] \[Rule] \(-Sinh[c[1]]\^2\)\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] - t\ Sinh[c[1]]])\)\ \((1 + 
+                  Tanh[phase + n\ c[1] - t\ Sinh[c[1]]])\)}, {u[n, t] \[Rule] 
+            a[1, 0] + Sinh[c[1]]\ Tanh[phase + n\ c[1] + t\ Sinh[c[1]]], 
+          v[n, t] \[Rule] \(-Sinh[c[1]]\^2\)\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] + t\ Sinh[c[1]]])\)\ \((1 + 
+                  Tanh[phase + n\ c[1] + t\ Sinh[c[1]]])\)}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(\( (*\ 
+      Relativistic\ Toda\ equation\ *) \)\(\[IndentingNewLine]\)\( (*\ 
+      To\ use\ the\ symbolic\ test, \ 
+      use\ the\ SymbolicTest\  \[Rule] \ 
+        True\ \(\(option\)\(.\)\)\ *) \)\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t]\ , 
+            t]\  \[Equal] \ \((1 + alpha*u[n, t])\)*\((v[n, t] - 
+                v[n - 1, t])\), \ 
+        D[v[n, t], \ t]\  \[Equal] 
+          v[n, t]*\((u[n + 1, t] - u[n, t] + alpha*v[n + 1, t] - 
+                alpha*v[n - 1, t])\)}, \ {u, v}, {n}, {t}, {alpha}, 
+      SymbolicTest \[Rule] True, \ Verbose\  \[Rule] \ True]\)], "Input"],
+
+Cell[BoxData[
+    \("The given system of differential-difference equations: "\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          InterpretationBox[
+            RowBox[{"u", "\[InvisibleSpace]", 
+              InterpretationBox[
+                SubscriptBox["\[Null]", 
+                  
+                  InterpretationBox[\(n\[InvisibleSpace]";"\[InvisibleSpace]t\
+\),
+                    SequenceForm[ n, ";", t],
+                    Editable->False]],
+                Subscript[ 
+                  SequenceForm[ n, ";", t]],
+                Editable->False]}],
+            SequenceForm[ u, 
+              Subscript[ 
+                SequenceForm[ n, ";", t]]],
+            Editable->False], 
+          "\[Equal]", \(\((1 + alpha\ u\_n)\)\ \((\(-v\_\(\(-1\) + n\)\) + 
+                v\_n)\)\)}], ",", 
+        RowBox[{
+          InterpretationBox[
+            RowBox[{"v", "\[InvisibleSpace]", 
+              InterpretationBox[
+                SubscriptBox["\[Null]", 
+                  
+                  InterpretationBox[\(n\[InvisibleSpace]";"\[InvisibleSpace]t\
+\),
+                    SequenceForm[ n, ";", t],
+                    Editable->False]],
+                Subscript[ 
+                  SequenceForm[ n, ";", t]],
+                Editable->False]}],
+            SequenceForm[ v, 
+              Subscript[ 
+                SequenceForm[ n, ";", t]]],
+            Editable->False], 
+          "\[Equal]", \(v\_n\ \((\(-u\_n\) + u\_\(1 + n\) - 
+                alpha\ v\_\(\(-1\) + n\) + alpha\ v\_\(1 + n\))\)\)}]}], 
+      "}"}]], "Print"],
+
+Cell[BoxData[
+    \("Transform the system of differential-difference equations into \
+nonlinear DDEs in T = Tanh."\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{\(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], "-", 
+          RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], 
+          "+", \(\(\(u[2]\)[\(-1\) + n]\)[T]\), 
+          "+", \(alpha\ \(\(u[1]\)[n]\)[T]\ \(\(u[2]\)[\(-1\) + n]\)[T]\), 
+          "-", \(\(\(u[2]\)[n]\)[T]\), 
+          "-", \(alpha\ \(\(u[1]\)[n]\)[T]\ \(\(u[2]\)[n]\)[T]\)}], ",", 
+        RowBox[{
+          RowBox[{\(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[2]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], "-", 
+          RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[2]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], 
+          "+", \(\(\(u[1]\)[n]\)[T]\ \(\(u[2]\)[n]\)[T]\), 
+          "-", \(\(\(u[1]\)[1 + n]\)[T]\ \(\(u[2]\)[n]\)[T]\), 
+          "+", \(alpha\ \(\(u[2]\)[\(-1\) + n]\)[T]\ \(\(u[2]\)[n]\)[T]\), 
+          "-", \(alpha\ \(\(u[2]\)[n]\)[T]\ \(\(u[2]\)[1 + n]\)[T]\)}]}], 
+      "}"}]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.120000000000001`\),
+      SequenceForm[ "Time Used:", .12000000000000099],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Determine the maximal degree of the polynomial solutions in T."\)], \
+"Print"],
+
+Cell[BoxData[
+    \(DDESpecialSolutionsmSolver::"remove" \(\(:\)\(\ \)\) 
+      "The potential solutions \!\({\({\(\(\(\(m[1]\)\) \[Rule] 1\)\), \(\(\(\
+\(m[2]\)\) \[Rule] 2\)\)}\)}\) are being removed because they are (i) \
+negative, (ii) contain freedom, (iii) fail to balance highest exponent terms \
+from two different terms in the original system.  If \!\(M\_i\) < 0, then the \
+transformation u -> 1/v may result in a system that DDESpecialSolutions can \
+solve."\)], "Message"],
+
+Cell[BoxData[
+    \(DDESpecialSolutionsmSolver::"remove" \(\(:\)\(\ \)\) 
+      "The potential solutions \!\({\({\(\(\(\(m[1]\)\) \[Rule] 1\)\), \(\(\(\
+\(m[2]\)\) \[Rule] 2\)\)}\)}\) are being removed because they are (i) \
+negative, (ii) contain freedom, (iii) fail to balance highest exponent terms \
+from two different terms in the original system.  If \!\(M\_i\) < 0, then the \
+transformation u -> 1/v may result in a system that DDESpecialSolutions can \
+solve."\)], "Message"],
+
+Cell[BoxData[
+    \({{m[1] \[Rule] 1, m[2] \[Rule] 1}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.8509999999999991`\),
+      SequenceForm[ "Time Used:", .85099999999999909],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Derive the nonlinear algebraic system for the coefficients."\)], \
+"Print"],
+
+Cell[BoxData[
+    \("Seek polynomial solutions in T of the form:"\)], "Print"],
+
+Cell[BoxData[
+    \({{\(\(u[1]\)[n]\)[T] \[Rule] 
+          a[1, 0] + T\ a[1, 1], \(\(u[2]\)[n]\)[T] \[Rule] 
+          a[2, 0] + T\ a[2, 1]}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("where T = Tanh["\[InvisibleSpace]\(phase + n\ c[1] + 
+          t\ c[2]\)\[InvisibleSpace]"]."\),
+      SequenceForm[ "where T = Tanh[", 
+        Plus[ phase, 
+          Times[ n, 
+            c[ 1]], 
+          Times[ t, 
+            c[ 2]]], "]."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("The nonlinear algebraic system is: "\)], "Print"],
+
+Cell[BoxData[
+    \({{{alpha\ a[2, 1] + c[2] \[Equal] 0, alpha\ a[2, 1] + c[2] \[Equal] 0, 
+          a[1, 1]\ c[2] - a[2, 1]\ Tanh[c[1]] - 
+              alpha\ a[1, 0]\ a[2, 1]\ Tanh[c[1]] \[Equal] 0, 
+          a[1, 1]\ c[2] - a[2, 1]\ Tanh[c[1]] - 
+              alpha\ a[1, 0]\ a[2, 1]\ Tanh[c[1]] \[Equal] 0, 
+          a[1, 1] - c[2] \[Equal] 0, 
+          a[2, 1]\ c[2] - a[1, 1]\ a[2, 0]\ Tanh[c[1]] - 
+              2\ alpha\ a[2, 0]\ a[2, 1]\ Tanh[c[1]] \[Equal] 0, 
+          a[1, 1]\ a[2, 1] + 2\ alpha\ a[2, 1]\^2 - 
+              a[1, 1]\ a[2, 0]\ Tanh[c[1]] \[Equal] 0, 
+          a[1, 1]\ a[2, 1] + 2\ alpha\ a[2, 1]\^2 - 
+              a[1, 1]\ a[2, 0]\ Tanh[c[1]] \[Equal] 0, 
+          a[2, 1]\ c[2] - a[1, 1]\ a[2, 0]\ Tanh[c[1]] - 
+              2\ alpha\ a[2, 0]\ a[2, 1]\ Tanh[c[1]] - 
+              a[1, 1]\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[2, 1]\ c[2]\ Tanh[c[1]]\^2 \[Equal] 0}, {a[2, 1], a[1, 1], 
+          a[2, 0], a[1, 0]}, {Tanh[c[1]], c[2]}, {alpha}, {alpha, a[1, 1], 
+          a[2, 1], Tanh[c[1]], c[2]}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.3410000000000011`\),
+      SequenceForm[ "Time Used:", .34100000000000108],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Solve the nonlinear algebraic system."\)], "Print"],
+
+Cell[BoxData[
+    \({{{a[1, 1] \[Rule] c[2], a[2, 1] \[Rule] \(-\(c[2]\/alpha\)\), 
+          a[2, 0] \[Rule] \(c[2]\ Coth[c[1]]\)\/alpha, 
+          a[1, 0] \[Rule] \(-\(\(Coth[
+                      c[1]]\ \((alpha\ c[2] + 
+                        Tanh[c[1]])\)\)\/alpha\)\)}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.5509999999999984`\),
+      SequenceForm[ "Time Used:", .55099999999999838],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Build and test the travelling wave solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("The possible non-trivial solutions (before any testing): "\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-\(\(1 + alpha\ c[2]\ Coth[c[1]] - 
+                    alpha\ c[2]\ Tanh[
+                        phase + n\ c[1] + t\ c[2]]\)\/alpha\)\), 
+          v[n, t] \[Rule] \(c[2]\ \((Coth[c[1]] - Tanh[phase + n\ c[1] + t\ \
+c[2]])\)\)\/alpha}}}\)], "Print"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-\(\(1 + alpha\ c[2]\ Coth[c[1]] - 
+                    alpha\ c[2]\ Tanh[
+                        phase + n\ c[1] + t\ c[2]]\)\/alpha\)\), 
+          v[n, t] \[Rule] \(c[2]\ \((Coth[c[1]] - Tanh[phase + n\ c[1] + t\ \
+c[2]])\)\)\/alpha}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]2.623000000000001`\),
+      SequenceForm[ "Time Used:", 2.6230000000000011],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \(\*"\<\"\"\>"\)], "Print"],
+
+Cell[BoxData[
+    \("The (numerically and/or symbolically) tested solutions:"\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-\(\(1 + alpha\ c[2]\ Coth[c[1]] - 
+                    alpha\ c[2]\ Tanh[
+                        phase + n\ c[1] + t\ c[2]]\)\/alpha\)\), 
+          v[n, t] \[Rule] \(c[2]\ \((Coth[c[1]] - Tanh[phase + n\ c[1] + t\ \
+c[2]])\)\)\/alpha}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ To\ force\ the\ function\ to\ use\ your\ choice\ of\ ansatz, \ 
+      use\ the\ DegreeOfThePolynomial\ \(\(option\)\(.\)\)\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"DDESpecialSolutions", "[", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{
+              RowBox[{
+                SuperscriptBox["u", 
+                  TagBox[\((0, 1)\),
+                    Derivative],
+                  MultilineFunction->None], "[", \(n, t\), "]"}], 
+              "==", \(\((1 + alpha\ u[n, t])\)\ \((\(-v[\(-1\) + n, t]\) + 
+                    v[n, t])\)\)}], ",", 
+            RowBox[{
+              RowBox[{
+                SuperscriptBox["v", 
+                  TagBox[\((0, 1)\),
+                    Derivative],
+                  MultilineFunction->None], "[", \(n, t\), "]"}], 
+              "==", \(v[n, 
+                  t]\ \((\(-u[n, t]\) + u[1 + n, t] - 
+                    alpha\ v[\(-1\) + n, t] + alpha\ v[1 + n, t])\)\)}]}], 
+          "}"}], ",", \({u, v}\), ",", \({n}\), ",", \({t}\), 
+        ",", \({alpha}\), ",", 
+        " ", \(DegreeOfThePolynomial \[Rule] {m[1] \[Rule] 1, 
+            m[2] \[Rule] 1}\)}], "]"}]], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutionsmSolver::"DegreeOfThePolynomial" \(\(:\)\(\ \)\) 
+      "Algorithm continuing with user-supplied exponent of the polynomial \
+\!\({\({\(\(\(\(m[1]\)\) \[Rule] 1\)\), \(\(\(\(m[2]\)\) \[Rule] \
+1\)\)}\)}\)."\)], "Message"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-\(\(1 + alpha\ c[2]\ Coth[c[1]] - 
+                    alpha\ c[2]\ Tanh[
+                        phase + n\ c[1] + t\ c[2]]\)\/alpha\)\), 
+          v[n, t] \[Rule] \(c[2]\ \((Coth[c[1]] - Tanh[phase + n\ c[1] + t\ \
+c[2]])\)\)\/alpha}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ Volterra\ equation\ *) \)], "Input"],
+
+Cell[BoxData[
+    \( (*\ To\ get\ the\ output\ in\ a\ copyable\ form, \ 
+      use\ the\ InputForm\  \[Rule] \ 
+        True\ \(\(option\)\(.\)\)\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], \ t]\  \[Equal] \ 
+          u[n, t]*\((v[n, t] - v[n - 1, t])\), \ 
+        D[v[n, t], \ t]\  \[Equal] \ 
+          v[n, t]*\((u[n + 1, t] - u[n, t])\)}, \ {u, \ 
+        v}, \ {n}, {t}, \ {}, \ InputForm \[Rule] True]\)], "Input"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell["\<\
+{{{u[n, t] -> -(c[2]*(Coth[c[1]] - Tanh[phase + n*c[1] + t*c[2]])), 
+   v[n, t] -> -(c[2]*(Coth[c[1]] + Tanh[phase + n*c[1] + t*c[2]]))}}}\
+\>", "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ 
+      If\ you\ would\ like\ to\ solve\ the\ algebraic\ system\ using\ other\ \
+software, \ 
+      use\ the\ SolveAlgebraicSystem\  \[Rule] \ 
+        False\ \(\(option\)\(.\)\)\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], \ t]\  \[Equal] \ 
+          u[n, t]*\((v[n, t] - v[n - 1, t])\), \ 
+        D[v[n, t], \ t]\  \[Equal] \ 
+          v[n, t]*\((u[n + 1, t] - u[n, t])\)}, \ {u, \ 
+        v}, \ {n}, {t}, \ {}, \ 
+      SolveAlgebraicSystem \[Rule] False]\)], "Input"],
+
+Cell[BoxData[
+    \({{{a[1, 1]\ c[2] - a[1, 0]\ a[2, 1]\ Tanh[c[1]] \[Equal] 0, 
+          a[1, 1]\ c[2] - a[1, 0]\ a[2, 1]\ Tanh[c[1]] \[Equal] 0, 
+          a[2, 1] + c[2] \[Equal] 0, a[2, 1] + c[2] \[Equal] 0, 
+          a[2, 1]\ c[2] - a[1, 1]\ a[2, 0]\ Tanh[c[1]] \[Equal] 0, 
+          a[2, 1]\ c[2] - a[1, 1]\ a[2, 0]\ Tanh[c[1]] \[Equal] 0, 
+          a[1, 1] - c[2] \[Equal] 0, a[1, 1] - c[2] \[Equal] 0}, {a[2, 1], 
+          a[1, 1], a[2, 0], a[1, 0]}, {Tanh[c[1]], c[2]}, {}, {a[1, 1], 
+          a[2, 1], Tanh[c[1]], c[2]}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(\( (*\ 
+      A\ new\ integrable\ system\ related\ to\ the\ relativistic\ Toda\ \
+equation\ *) \)\(\[IndentingNewLine]\)\( (*\ Ref : \ Suris, \ 
+      J . Phys . A . 30\ \((1997)\)\ 1745\ *) \)\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], 
+            t] \[Equal] \((u[n + 1, t] - v[n, t])\)*
+              v[n, t] - \((u[n - 1, t] - v[n - 1, t])\)*v[n - 1, t], 
+        D[v[n, t], t] \[Equal] v[n, t]*\((u[n + 1, t] - u[n, t])\)}, {u, \ 
+        v}, {n}, {t}, {}]\)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutionsmSolver::"remove" \(\(:\)\(\ \)\) 
+      "The potential solutions \!\({\(\({\(\(\(\(m[1]\)\) \[Rule] 1\)\), \(\(\
+\(\(m[2]\)\) \[Rule] 0\)\)}\)\), \(\({\(\(\(\(m[1]\)\) \[Rule] 1\)\), \
+\(\(\(\(m[2]\)\) \[Rule] 2\)\)}\)\)}\) are being removed because they are (i) \
+negative, (ii) contain freedom, (iii) fail to balance highest exponent terms \
+from two different terms in the original system.  If \!\(M\_i\) < 0, then the \
+transformation u -> 1/v may result in a system that DDESpecialSolutions can \
+solve."\)], "Message"],
+
+Cell[BoxData[
+    \(DDESpecialSolutionsmSolver::"remove" \(\(:\)\(\ \)\) 
+      "The potential solutions \!\({\(\({\(\(\(\(m[1]\)\) \[Rule] 1\)\), \(\(\
+\(\(m[2]\)\) \[Rule] \(\(-1\)\)\)\)}\)\), \(\({\(\(\(\(m[1]\)\) \[Rule] \
+1\)\), \(\(\(\(m[2]\)\) \[Rule] 3\)\)}\)\)}\) are being removed because they \
+are (i) negative, (ii) contain freedom, (iii) fail to balance highest \
+exponent terms from two different terms in the original system.  If \
+\!\(M\_i\) < 0, then the transformation u -> 1/v may result in a system that \
+DDESpecialSolutions can solve."\)], "Message"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell["\<\
+These solutions did not simplify to be less than 10^(-7.97729) when random \
+numbers in [-1,1] were substituted for the unknowns.  Please test these \
+solutions by hand or interactively with Mathematica.\
+\>", "Message"],
+
+Cell[BoxData[
+    \({{u[n, 
+            t] \[Rule] \(-c[2]\)\ \((3\ Coth[c[1]] - 
+                Tanh[phase + n\ c[1] + t\ c[2]])\), 
+        v[n, t] \[Rule] \(-c[2]\)\ \((Coth[c[1]] + 
+                Tanh[phase + n\ c[1] + t\ c[2]])\)}, {u[n, t] \[Rule] 
+          c[2]\ \((Coth[c[1]] + Tanh[phase + n\ c[1] + t\ c[2]])\), 
+        v[n, t] \[Rule] 
+          c[2]\ \((Coth[c[1]] + 
+                Tanh[phase + n\ c[1] + t\ c[2]])\)}}\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell["\<\
+These results did not easily simplify to zero. Please test these solutions by \
+hand or interactively with Mathematica. \
+\>", "Message"],
+
+Cell[BoxData[
+    \({{{\(8\ \[ExponentialE]\^\(2\ phase + 2\ c[1] + 2\ n\ c[1] + 2\ t\ c[2]\
+\)\ c[2]\^2\)\/\((\[ExponentialE]\^\(2\ c[1]\) + \[ExponentialE]\^\(2\ phase \
++ 2\ n\ c[1] + 2\ t\ c[2]\))\)\^2, 
+          0}, {u[n, 
+              t] \[Rule] \(-c[2]\)\ \((3\ Coth[c[1]] - 
+                  Tanh[phase + n\ c[1] + t\ c[2]])\), 
+          v[n, t] \[Rule] \(-c[2]\)\ \((Coth[c[1]] + 
+                  Tanh[phase + n\ c[1] + t\ c[2]])\)}}}\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, t] \[Rule] 
+            c[2]\ \((Coth[c[1]] + Tanh[phase + n\ c[1] + t\ c[2]])\), 
+          v[n, t] \[Rule] 
+            c[2]\ \((Coth[c[1]] + 
+                  Tanh[phase + n\ c[1] + t\ c[2]])\)}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(\( (*\ 
+      On\ some\ integrable\ systems\ related\ to\ the\ Toda\ equations\ *) \)\
+\(\[IndentingNewLine]\)\( (*\ Ref : \ Suris, \ 
+      J . Phys . A . 30\ \((1997)\)\ 2235\ *) \)\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], t] \[Equal] 
+          u[n, t]*\((v[n, t] - v[n - 1, t])\), 
+        D[v[n, t], t] \[Equal] v[n, t]*\((u[n + 1, t] - u[n, t])\)}, {u, 
+        v}, {n}, {t}, {}]\)], "Input"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-c[2]\)\ \((Coth[c[1]] - 
+                  Tanh[phase + n\ c[1] + t\ c[2]])\), 
+          v[n, t] \[Rule] \(-c[2]\)\ \((Coth[c[1]] + 
+                  Tanh[phase + n\ c[1] + t\ c[2]])\)}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ Schrodinger\ system\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], t] - 
+            alpha*\((u[n + 1, t] - 2*u[n, t] + u[n - 1, t])\) - 
+            u[n, t]*v[n, t]*\((u[n + 1, t] + u[n - 1, t])\) \[Equal] 0, 
+        D[v[n, t], t] + alpha*\((v[n + 1, t] - 2*v[n, t] + v[n - 1, t])\) + 
+            u[n, t]*v[n, t]*\((v[n + 1, t] + v[n - 1, t])\) \[Equal] 
+          0}, {u, \ v}, \ {n}, {t}, \ {alpha}]\)], "Input"],
+
+Cell[BoxData[
+    \(AnalyzeAndSolve::"soln" \(\(:\)\(\ \)\) 
+      "The solution \!\({\(\(\(\(a[\(\(1, 0\)\)]\)\) \[Rule] \(\(-\(\(\(4\\ \
+alpha\)\/\(\((\(\(-1\)\) + \@2)\)\^2\\ \((1 + \@2)\)\^2\\ \(\(a[\(\(2, 2\)\)]\
+\)\)\)\)\)\)\)\)\), \(\(\(\(a[\(\(2, 0\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(a[\(\(1, 2\)\)]\)\) \[Rule] \(8\\ alpha\)\/\(\((\(\(-1\)\) + \
+\@2)\)\^2\\ \((1 + \@2)\)\^2\\ \(\(a[\(\(2, 2\)\)]\)\)\)\)\), \
+\(\(\(\(a[\(\(1, 1\)\)]\)\) \[Rule] \(\(-\(\(\(2\\ \
+\(\(c[2]\)\)\)\/\(\(\((\(\(-1\)\) + \@2)\)\)\\ \(\((\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\))\)\)\\ \(\(a[\(\(2, 2\)\)]\)\)\)\)\)\)\)\)\), \(\(\(\(a[\(\
+\(2, 1\)\)]\)\) \[Rule] 0\)\), \(\(\(\(Coth[\(\(c[1]\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(Tanh[\(\(c[1]\)\)]\)\) \[Rule] \(\(-\@2\)\)\)\)}\) is being removed \
+because it is inconsistent."\)], "Message"],
+
+Cell[BoxData[
+    \(AnalyzeAndSolve::"soln" \(\(:\)\(\ \)\) 
+      "The solution \!\({\(\(\(\(a[\(\(1, 0\)\)]\)\) \[Rule] \(\(-\(\(\(4\\ \
+alpha\)\/\(\((\(\(-1\)\) + \@2)\)\^2\\ \((1 + \@2)\)\^2\\ \(\(a[\(\(2, 2\)\)]\
+\)\)\)\)\)\)\)\)\), \(\(\(\(a[\(\(2, 0\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(a[\(\(1, 2\)\)]\)\) \[Rule] \(8\\ alpha\)\/\(\((\(\(-1\)\) + \
+\@2)\)\^2\\ \((1 + \@2)\)\^2\\ \(\(a[\(\(2, 2\)\)]\)\)\)\)\), \
+\(\(\(\(a[\(\(1, 1\)\)]\)\) \[Rule] \(\(-\(\(\(2\\ \
+\(\(c[2]\)\)\)\/\(\(\((\(\(-1\)\) + \@2)\)\)\\ \(\((\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\))\)\)\\ \(\(a[\(\(2, 2\)\)]\)\)\)\)\)\)\)\)\), \(\(\(\(a[\(\
+\(2, 1\)\)]\)\) \[Rule] 0\)\), \(\(\(\(Coth[\(\(c[1]\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(Tanh[\(\(c[1]\)\)]\)\) \[Rule] \@2\)\)}\) is being removed because it \
+is inconsistent."\)], "Message"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-\(\(alpha\ Sinh[c[1]]\^2\ \((\(-1\) + 
+                        Tanh[phase + n\ c[1] - 
+                            2\ alpha\ t\ Sinh[c[1]]\^2])\)\)\/a[2, 1]\)\), 
+          v[n, t] \[Rule] 
+            a[2, 1]\ \((1 + 
+                  Tanh[phase + n\ c[1] - 2\ alpha\ t\ Sinh[c[1]]\^2])\)}, {u[
+              n, t] \[Rule] \(-\(\(alpha\ Sinh[c[1]]\^2\ \((1 + 
+                        Tanh[phase + n\ c[1] + 
+                            2\ alpha\ t\ Sinh[c[1]]\^2])\)\)\/a[2, 1]\)\), 
+          v[n, t] \[Rule] 
+            a[2, 1]\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] + 
+                      2\ alpha\ t\ Sinh[c[1]]\^2])\)}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ Ablowitz - 
+        Ladik\ discretization\ of\ NLS\ equation\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], \ t]\  \[Equal] \ 
+          aa*\((u[n + 1, t] - 2*u[n, t] + u[n - 1, t])\) + 
+            u[n, t]*v[n, t]*\((u[n + 1, t] + u[n - 1, t])\), 
+        D[v[n, t], 
+            t]\  == \(-aa\)*\((v[n + 1, t] - 2*v[n, t] + v[n - 1, t])\) - 
+            u[n, t]*v[n, t]*\((v[n + 1, t] + v[n - 1, t])\)}, {u, \ 
+        v}, {n}, {t}, {aa}, \ Verbose\  \[Rule] \ True]\)], "Input"],
+
+Cell[BoxData[
+    \("The given system of differential-difference equations: "\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          InterpretationBox[
+            RowBox[{"u", "\[InvisibleSpace]", 
+              InterpretationBox[
+                SubscriptBox["\[Null]", 
+                  
+                  InterpretationBox[\(n\[InvisibleSpace]";"\[InvisibleSpace]t\
+\),
+                    SequenceForm[ n, ";", t],
+                    Editable->False]],
+                Subscript[ 
+                  SequenceForm[ n, ";", t]],
+                Editable->False]}],
+            SequenceForm[ u, 
+              Subscript[ 
+                SequenceForm[ n, ";", t]]],
+            Editable->False], 
+          "\[Equal]", \(aa\ \((u\_\(\(-1\) + n\) - 2\ u\_n + 
+                  u\_\(1 + n\))\) + 
+            u\_n\ \((u\_\(\(-1\) + n\) + u\_\(1 + n\))\)\ v\_n\)}], ",", 
+        RowBox[{
+          InterpretationBox[
+            RowBox[{"v", "\[InvisibleSpace]", 
+              InterpretationBox[
+                SubscriptBox["\[Null]", 
+                  
+                  InterpretationBox[\(n\[InvisibleSpace]";"\[InvisibleSpace]t\
+\),
+                    SequenceForm[ n, ";", t],
+                    Editable->False]],
+                Subscript[ 
+                  SequenceForm[ n, ";", t]],
+                Editable->False]}],
+            SequenceForm[ v, 
+              Subscript[ 
+                SequenceForm[ n, ";", t]]],
+            Editable->False], 
+          "\[Equal]", \(\(-u\_n\)\ v\_n\ \((v\_\(\(-1\) + n\) + 
+                  v\_\(1 + n\))\) - 
+            aa\ \((v\_\(\(-1\) + n\) - 2\ v\_n + v\_\(1 + n\))\)\)}]}], 
+      "}"}]], "Print"],
+
+Cell[BoxData[
+    \("Transform the system of differential-difference equations into \
+nonlinear DDEs in T = Tanh."\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{\(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], "-", 
+          RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], 
+          "-", \(aa\ \(\(u[1]\)[\(-1\) + n]\)[T]\), 
+          "+", \(2\ aa\ \(\(u[1]\)[n]\)[T]\), 
+          "-", \(aa\ \(\(u[1]\)[1 + n]\)[T]\), 
+          "-", \(\(\(u[1]\)[\(-1\) + n]\)[T]\ \(\(u[1]\)[n]\)[
+              T]\ \(\(u[2]\)[n]\)[T]\), 
+          "-", \(\(\(u[1]\)[n]\)[T]\ \(\(u[1]\)[1 + n]\)[T]\ \(\(u[2]\)[n]\)[
+              T]\)}], ",", 
+        RowBox[{
+          RowBox[{\(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[2]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], "-", 
+          RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+            RowBox[{
+              SuperscriptBox[\(\(u[2]\)[n]\), "\[Prime]",
+                MultilineFunction->None], "[", "T", "]"}]}], 
+          "+", \(aa\ \(\(u[2]\)[\(-1\) + n]\)[T]\), 
+          "-", \(2\ aa\ \(\(u[2]\)[n]\)[T]\), 
+          "+", \(\(\(u[1]\)[n]\)[T]\ \(\(u[2]\)[\(-1\) + n]\)[
+              T]\ \(\(u[2]\)[n]\)[T]\), "+", \(aa\ \(\(u[2]\)[1 + n]\)[T]\), 
+          "+", \(\(\(u[1]\)[n]\)[T]\ \(\(u[2]\)[n]\)[T]\ \(\(u[2]\)[1 + n]\)[
+              T]\)}]}], "}"}]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.1599999999999966`\),
+      SequenceForm[ "Time Used:", .15999999999999659],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Determine the maximal degree of the polynomial solutions in T."\)], \
+"Print"],
+
+Cell[BoxData[
+    \({{m[1] \[Rule] 1, m[2] \[Rule] 1}, {m[1] \[Rule] 2, 
+        m[2] \[Rule] 2}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]1.0409999999999968`\),
+      SequenceForm[ "Time Used:", 1.0409999999999968],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Derive the nonlinear algebraic system for the coefficients."\)], \
+"Print"],
+
+Cell[BoxData[
+    \("Seek polynomial solutions in T of the form:"\)], "Print"],
+
+Cell[BoxData[
+    \({{\(\(u[1]\)[n]\)[T] \[Rule] 
+          a[1, 0] + T\ a[1, 1], \(\(u[2]\)[n]\)[T] \[Rule] 
+          a[2, 0] + T\ a[2, 1]}, {\(\(u[1]\)[n]\)[T] \[Rule] 
+          a[1, 0] + T\ a[1, 1] + T\^2\ a[1, 2], \(\(u[2]\)[n]\)[T] \[Rule] 
+          a[2, 0] + T\ a[2, 1] + T\^2\ a[2, 2]}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("where T = Tanh["\[InvisibleSpace]\(phase + n\ c[1] + 
+          t\ c[2]\)\[InvisibleSpace]"]."\),
+      SequenceForm[ "where T = Tanh[", 
+        Plus[ phase, 
+          Times[ n, 
+            c[ 1]], 
+          Times[ t, 
+            c[ 2]]], "]."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("The nonlinear algebraic system is: "\)], "Print"],
+
+Cell[BoxData[
+    \({{{2\ a[1, 0]\^2\ a[2, 0] - a[1, 1]\ c[2] \[Equal] 0, 
+          2\ a[1, 0]\ a[2, 1] + c[2] \[Equal] 0, 
+          2\ a[1, 0]\ a[1, 1]\ a[2, 0] + a[1, 0]\^2\ a[2, 1] - 
+              aa\ a[1, 1]\ Tanh[c[1]]\^2 - 
+              a[1, 0]\ a[1, 1]\ a[2, 0]\ Tanh[c[1]]\^2 \[Equal] 
+            0, \(-a[1, 1]\^2\)\ a[2, 1] - aa\ a[1, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 0]\ a[1, 1]\ a[2, 0]\ Tanh[c[1]]\^2 + 
+              a[1, 0]\^2\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\^2\ a[2, 1]\ Tanh[c[1]]\^2 \[Equal] 
+            0, \(-2\)\ a[1, 1]\^2\ a[2, 0] - 4\ a[1, 0]\ a[1, 1]\ a[2, 1] - 
+              a[1, 1]\ c[2] + 2\ a[1, 0]\^2\ a[2, 0]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 1]\^2\ a[2, 0]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\ a[1, 1]\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              a[1, 1]\ c[2]\ Tanh[c[1]]\^2 \[Equal] 0, 
+          2\ a[1, 0]\ a[2, 0]\^2 + a[2, 1]\ c[2] \[Equal] 0, 
+          2\ a[1, 1]\ a[2, 0] - c[2] \[Equal] 0, 
+          a[1, 1]\ a[2, 0]\^2 + 2\ a[1, 0]\ a[2, 0]\ a[2, 1] - 
+              aa\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              a[1, 0]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^2 \[Equal] 
+            0, \(-a[1, 1]\)\ a[2, 1]\^2 + 
+              a[1, 1]\ a[2, 0]\^2\ Tanh[c[1]]\^2 - 
+              aa\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 0]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\ a[2, 1]\^2\ Tanh[c[1]]\^2 \[Equal] 
+            0, \(-4\)\ a[1, 1]\ a[2, 0]\ a[2, 1] - 2\ a[1, 0]\ a[2, 1]\^2 + 
+              a[2, 1]\ c[2] + 2\ a[1, 0]\ a[2, 0]\^2\ Tanh[c[1]]\^2 + 
+              2\ a[1, 1]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\ a[2, 1]\^2\ Tanh[c[1]]\^2 + 
+              a[2, 1]\ c[2]\ Tanh[c[1]]\^2 \[Equal] 0}, {a[2, 1], a[1, 1], 
+          a[2, 0], a[1, 0]}, {Tanh[c[1]], c[2]}, {aa}, {aa, a[1, 1], a[2, 1], 
+          Tanh[c[1]], c[2]}}, {{a[1, 2] + a[1, 0]\ Tanh[c[1]]\^2 \[Equal] 0, 
+          2\ a[1, 0]\^2\ a[2, 0] - a[1, 1]\ c[2] + 
+              2\ aa\ a[1, 2]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\ a[1, 2]\ a[2, 0]\ Tanh[c[1]]\^2 \[Equal] 0, 
+          a[1, 2]\^2\ a[2, 1] + a[1, 0]\ a[1, 2]\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 0]\ a[1, 1]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\ a[1, 2]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              a[1, 2]\ c[2]\ Tanh[c[1]]\^2 \[Equal] 0, 
+          2\ a[1, 0]\ a[1, 1]\ a[2, 0] + a[1, 0]\^2\ a[2, 1] - 
+              a[1, 2]\ c[2] - aa\ a[1, 1]\ Tanh[c[1]]\^2 - 
+              a[1, 0]\ a[1, 1]\ a[2, 0]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\ a[1, 2]\ a[2, 0]\ Tanh[c[1]]\^2 + 
+              a[1, 0]\ a[1, 2]\ a[2, 1]\ Tanh[c[1]]\^2 \[Equal] 0, 
+          2\ a[1, 2]\^2\ a[2, 2] + 2\ a[1, 2]\^2\ a[2, 0]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 1]\^2\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 0]\ a[1, 2]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              8\ a[1, 2]\^2\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              2\ aa\ a[1, 2]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 0]\ a[1, 2]\ a[2, 0]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 0]\ a[1, 1]\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 1]\ a[1, 2]\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 0]\^2\ a[2, 2]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 1]\^2\ a[2, 2]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 2]\^2\ a[2, 2]\ Tanh[c[1]]\^4 + 
+              a[1, 1]\ c[2]\ Tanh[c[1]]\^4 \[Equal] 
+            0, \(-2\)\ a[1, 1]\^2\ a[2, 0] - 4\ a[1, 0]\ a[1, 2]\ a[2, 0] - 
+              4\ a[1, 0]\ a[1, 1]\ a[2, 1] - 2\ a[1, 0]\^2\ a[2, 2] - 
+              a[1, 1]\ c[2] + 8\ aa\ a[1, 2]\ Tanh[c[1]]\^2 + 
+              4\ a[1, 0]\^2\ a[2, 0]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 1]\^2\ a[2, 0]\ Tanh[c[1]]\^2 + 
+              8\ a[1, 0]\ a[1, 2]\ a[2, 0]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 2]\^2\ a[2, 0]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\ a[1, 1]\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 1]\ a[1, 2]\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 0]\ a[1, 2]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 1]\ c[2]\ Tanh[c[1]]\^2 - 
+              2\ aa\ a[1, 2]\ Tanh[c[1]]\^4 - 
+              2\ a[1, 0]\ a[1, 2]\ a[2, 0]\ Tanh[c[1]]\^4 \[Equal] 0, 
+          a[1, 2]\^2\ a[2, 1] + 2\ a[1, 1]\ a[1, 2]\ a[2, 2] - 
+              a[1, 1]\^2\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              a[1, 0]\ a[1, 2]\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              4\ a[1, 2]\^2\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              3\ a[1, 0]\ a[1, 1]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              5\ a[1, 1]\ a[1, 2]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 2]\ c[2]\ Tanh[c[1]]\^2 - aa\ a[1, 1]\ Tanh[c[1]]\^4 + 
+              a[1, 0]\ a[1, 1]\ a[2, 0]\ Tanh[c[1]]\^4 + 
+              a[1, 1]\ a[1, 2]\ a[2, 0]\ Tanh[c[1]]\^4 + 
+              a[1, 0]\^2\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              a[1, 1]\^2\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              a[1, 2]\^2\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              a[1, 0]\ a[1, 1]\ a[2, 2]\ Tanh[c[1]]\^4 + 
+              a[1, 1]\ a[1, 2]\ a[2, 2]\ Tanh[c[1]]\^4 - 
+              a[1, 2]\ c[2]\ Tanh[c[1]]\^4 \[Equal] 
+            0, \(-2\)\ a[1, 1]\ a[1, 2]\ a[2, 0] - a[1, 1]\^2\ a[2, 1] - 
+              2\ a[1, 0]\ a[1, 2]\ a[2, 1] - 2\ a[1, 0]\ a[1, 1]\ a[2, 2] - 
+              a[1, 2]\ c[2] - aa\ a[1, 1]\ Tanh[c[1]]\^2 + 
+              3\ a[1, 0]\ a[1, 1]\ a[2, 0]\ Tanh[c[1]]\^2 + 
+              5\ a[1, 1]\ a[1, 2]\ a[2, 0]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\^2\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\^2\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              4\ a[1, 0]\ a[1, 2]\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              a[1, 2]\^2\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 0]\ a[1, 1]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              a[1, 1]\ a[1, 2]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 2]\ c[2]\ Tanh[c[1]]\^2 - aa\ a[1, 1]\ Tanh[c[1]]\^4 - 
+              a[1, 0]\ a[1, 1]\ a[2, 0]\ Tanh[c[1]]\^4 - 
+              a[1, 1]\ a[1, 2]\ a[2, 0]\ Tanh[c[1]]\^4 - 
+              a[1, 0]\ a[1, 2]\ a[2, 1]\ Tanh[c[1]]\^4 \[Equal] 0, 
+          2\ a[1, 2]\^2\ a[2, 0] + 4\ a[1, 1]\ a[1, 2]\ a[2, 1] + 
+              2\ a[1, 1]\^2\ a[2, 2] + 4\ a[1, 0]\ a[1, 2]\ a[2, 2] + 
+              6\ aa\ a[1, 2]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 1]\^2\ a[2, 0]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 0]\ a[1, 2]\ a[2, 0]\ Tanh[c[1]]\^2 - 
+              8\ a[1, 2]\^2\ a[2, 0]\ Tanh[c[1]]\^2 - 
+              6\ a[1, 0]\ a[1, 1]\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              10\ a[1, 1]\ a[1, 2]\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              4\ a[1, 0]\^2\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 1]\^2\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              8\ a[1, 0]\ a[1, 2]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 2]\^2\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 1]\ c[2]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\^2\ a[2, 0]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 1]\^2\ a[2, 0]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 2]\^2\ a[2, 0]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 0]\ a[1, 1]\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 1]\ a[1, 2]\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 0]\ a[1, 2]\ a[2, 2]\ Tanh[c[1]]\^4 - 
+              a[1, 1]\ c[2]\ Tanh[c[1]]\^4 \[Equal] 0, 
+          a[2, 2] + a[2, 0]\ Tanh[c[1]]\^2 \[Equal] 0, 
+          2\ a[1, 0]\ a[2, 0]\^2 + a[2, 1]\ c[2] + 
+              2\ aa\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^2 \[Equal] 0, 
+          a[1, 1]\ a[2, 2]\^2 + a[1, 2]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              a[1, 2]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              a[2, 2]\ c[2]\ Tanh[c[1]]\^2 \[Equal] 0, 
+          a[1, 1]\ a[2, 0]\^2 + 2\ a[1, 0]\ a[2, 0]\ a[2, 1] + 
+              a[2, 2]\ c[2] - aa\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              a[1, 0]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              a[1, 0]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^2 \[Equal] 0, 
+          2\ a[1, 2]\ a[2, 2]\^2 - 2\ a[1, 2]\ a[2, 1]\^2\ Tanh[c[1]]\^2 - 
+              2\ a[1, 2]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\ a[2, 2]\^2\ Tanh[c[1]]\^2 - 
+              8\ a[1, 2]\ a[2, 2]\^2\ Tanh[c[1]]\^2 + 
+              2\ a[1, 2]\ a[2, 0]\^2\ Tanh[c[1]]\^4 + 
+              2\ a[1, 1]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 2]\ a[2, 1]\^2\ Tanh[c[1]]\^4 - 
+              2\ aa\ a[2, 2]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 0]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 1]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 2]\ a[2, 2]\^2\ Tanh[c[1]]\^4 - 
+              a[2, 1]\ c[2]\ Tanh[c[1]]\^4 \[Equal] 0, 
+          2\ a[1, 2]\ a[2, 0]\^2 + 4\ a[1, 1]\ a[2, 0]\ a[2, 1] + 
+              2\ a[1, 0]\ a[2, 1]\^2 + 4\ a[1, 0]\ a[2, 0]\ a[2, 2] - 
+              a[2, 1]\ c[2] - 4\ a[1, 0]\ a[2, 0]\^2\ Tanh[c[1]]\^2 - 
+              2\ a[1, 1]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 0]\ a[2, 1]\^2\ Tanh[c[1]]\^2 - 
+              8\ aa\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              8\ a[1, 0]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 2]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 1]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\ a[2, 2]\^2\ Tanh[c[1]]\^2 - 
+              2\ a[2, 1]\ c[2]\ Tanh[c[1]]\^2 + 
+              2\ aa\ a[2, 2]\ Tanh[c[1]]\^4 + 
+              2\ a[1, 0]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^4 \[Equal] 0, 
+          2\ a[1, 2]\ a[2, 1]\ a[2, 2] + a[1, 1]\ a[2, 2]\^2 - 
+              3\ a[1, 2]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^2 - 
+              a[1, 1]\ a[2, 1]\^2\ Tanh[c[1]]\^2 - 
+              a[1, 1]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              5\ a[1, 2]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              4\ a[1, 1]\ a[2, 2]\^2\ Tanh[c[1]]\^2 + 
+              2\ a[2, 2]\ c[2]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\ a[2, 0]\^2\ Tanh[c[1]]\^4 - 
+              aa\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              a[1, 0]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              a[1, 2]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^4 + 
+              a[1, 1]\ a[2, 1]\^2\ Tanh[c[1]]\^4 + 
+              a[1, 0]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^4 + 
+              a[1, 2]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^4 + 
+              a[1, 1]\ a[2, 2]\^2\ Tanh[c[1]]\^4 + 
+              a[2, 2]\ c[2]\ Tanh[c[1]]\^4 \[Equal] 
+            0, \(-2\)\ a[1, 2]\ a[2, 0]\ a[2, 1] - a[1, 1]\ a[2, 1]\^2 - 
+              2\ a[1, 1]\ a[2, 0]\ a[2, 2] - 2\ a[1, 0]\ a[2, 1]\ a[2, 2] + 
+              a[2, 2]\ c[2] + 2\ a[1, 1]\ a[2, 0]\^2\ Tanh[c[1]]\^2 - 
+              aa\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              3\ a[1, 0]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 2]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\ a[2, 1]\^2\ Tanh[c[1]]\^2 + 
+              4\ a[1, 1]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              5\ a[1, 0]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              a[1, 2]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^2 - 
+              a[1, 1]\ a[2, 2]\^2\ Tanh[c[1]]\^2 + 
+              2\ a[2, 2]\ c[2]\ Tanh[c[1]]\^2 - aa\ a[2, 1]\ Tanh[c[1]]\^4 - 
+              a[1, 0]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^4 - 
+              a[1, 1]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^4 - 
+              a[1, 0]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^4 \[Equal] 
+            0, \(-2\)\ a[1, 2]\ a[2, 1]\^2 - 4\ a[1, 2]\ a[2, 0]\ a[2, 2] - 
+              4\ a[1, 1]\ a[2, 1]\ a[2, 2] - 2\ a[1, 0]\ a[2, 2]\^2 + 
+              4\ a[1, 2]\ a[2, 0]\^2\ Tanh[c[1]]\^2 + 
+              6\ a[1, 1]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\ a[2, 1]\^2\ Tanh[c[1]]\^2 + 
+              2\ a[1, 2]\ a[2, 1]\^2\ Tanh[c[1]]\^2 - 
+              6\ aa\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              8\ a[1, 2]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              10\ a[1, 1]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^2 + 
+              8\ a[1, 0]\ a[2, 2]\^2\ Tanh[c[1]]\^2 - 
+              2\ a[1, 2]\ a[2, 2]\^2\ Tanh[c[1]]\^2 - 
+              2\ a[2, 1]\ c[2]\ Tanh[c[1]]\^2 - 
+              2\ a[1, 0]\ a[2, 0]\^2\ Tanh[c[1]]\^4 - 
+              2\ a[1, 1]\ a[2, 0]\ a[2, 1]\ Tanh[c[1]]\^4 - 
+              2\ a[1, 0]\ a[2, 1]\^2\ Tanh[c[1]]\^4 - 
+              2\ a[1, 2]\ a[2, 0]\ a[2, 2]\ Tanh[c[1]]\^4 - 
+              2\ a[1, 1]\ a[2, 1]\ a[2, 2]\ Tanh[c[1]]\^4 - 
+              2\ a[1, 0]\ a[2, 2]\^2\ Tanh[c[1]]\^4 - 
+              a[2, 1]\ c[2]\ Tanh[c[1]]\^4 \[Equal] 0}, {a[2, 2], a[1, 2], 
+          a[2, 1], a[1, 1], a[2, 0], a[1, 0]}, {Tanh[c[1]], c[2]}, {aa}, {aa, 
+          a[1, 2], a[2, 2], Tanh[c[1]], c[2]}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]3.4350000000000023`\),
+      SequenceForm[ "Time Used:", 3.4350000000000023],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Solve the nonlinear algebraic system."\)], "Print"],
+
+Cell[BoxData[
+    \(AnalyzeAndSolve::"soln" \(\(:\)\(\ \)\) 
+      "The solution \!\({\(\(\(\(a[\(\(1, 0\)\)]\)\) \[Rule] \(\(-\(\(\(4\\ \
+aa\)\/\(\((\(\(-1\)\) + \@2)\)\^2\\ \((1 + \@2)\)\^2\\ \(\(a[\(\(2, \
+2\)\)]\)\)\)\)\)\)\)\)\), \(\(\(\(a[\(\(2, 0\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(a[\(\(1, 2\)\)]\)\) \[Rule] \(8\\ aa\)\/\(\((\(\(-1\)\) + \@2)\)\^2\\ \
+\((1 + \@2)\)\^2\\ \(\(a[\(\(2, 2\)\)]\)\)\)\)\), \(\(\(\(a[\(\(1, 1\)\)]\)\) \
+\[Rule] \(\(-\(\(\(2\\ \(\(c[2]\)\)\)\/\(\(\((\(\(-1\)\) + \@2)\)\)\\ \(\((1 \
++ \(\(\[LeftSkeleton] 1 \[RightSkeleton]\)\))\)\)\\ \(\(a[\(\(2, 2\)\)]\)\)\)\
+\)\)\)\)\)\), \(\(\(\(a[\(\(2, 1\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(Coth[\(\(c[1]\)\)]\)\) \[Rule] 0\)\), \(\(\(\(Tanh[\(\(c[1]\)\)]\)\) \
+\[Rule] \(\(-\@2\)\)\)\)}\) is being removed because it is inconsistent."\)], \
+"Message"],
+
+Cell[BoxData[
+    \(AnalyzeAndSolve::"soln" \(\(:\)\(\ \)\) 
+      "The solution \!\({\(\(\(\(a[\(\(1, 0\)\)]\)\) \[Rule] \(\(-\(\(\(4\\ \
+aa\)\/\(\((\(\(-1\)\) + \@2)\)\^2\\ \((1 + \@2)\)\^2\\ \(\(a[\(\(2, \
+2\)\)]\)\)\)\)\)\)\)\)\), \(\(\(\(a[\(\(2, 0\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(a[\(\(1, 2\)\)]\)\) \[Rule] \(8\\ aa\)\/\(\((\(\(-1\)\) + \@2)\)\^2\\ \
+\((1 + \@2)\)\^2\\ \(\(a[\(\(2, 2\)\)]\)\)\)\)\), \(\(\(\(a[\(\(1, 1\)\)]\)\) \
+\[Rule] \(\(-\(\(\(2\\ \(\(c[2]\)\)\)\/\(\(\((\(\(-1\)\) + \@2)\)\)\\ \(\((1 \
++ \(\(\[LeftSkeleton] 1 \[RightSkeleton]\)\))\)\)\\ \(\(a[\(\(2, 2\)\)]\)\)\)\
+\)\)\)\)\)\), \(\(\(\(a[\(\(2, 1\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(Coth[\(\(c[1]\)\)]\)\) \[Rule] 0\)\), \(\(\(\(Tanh[\(\(c[1]\)\)]\)\) \
+\[Rule] \@2\)\)}\) is being removed because it is inconsistent."\)], "Message"],
+
+Cell[BoxData[
+    \({{{a[1, 1] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\)\/a[2, 1]\)\), 
+          a[1, 0] \[Rule] \(aa\ Sinh[c[1]]\^2\)\/a[2, 1], 
+          a[2, 0] \[Rule] a[2, 1], 
+          c[2] \[Rule] \(-2\)\ aa\ Sinh[c[1]]\^2}, {a[1, 
+              1] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\)\/a[2, 1]\)\), 
+          a[1, 0] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\)\/a[2, 1]\)\), 
+          a[2, 0] \[Rule] \(-a[2, 1]\), 
+          c[2] \[Rule] 2\ aa\ Sinh[c[1]]\^2}}, {}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]9.274000000000001`\),
+      SequenceForm[ "Time Used:", 9.2740000000000009],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Build and test the travelling wave solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("The possible non-trivial solutions (before any testing): "\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\ \((\(-1\) + 
+                        Tanh[phase + n\ c[1] - 
+                            2\ aa\ t\ Sinh[c[1]]\^2])\)\)\/a[2, 1]\)\), 
+          v[n, t] \[Rule] 
+            a[2, 1]\ \((1 + 
+                  Tanh[phase + n\ c[1] - 2\ aa\ t\ Sinh[c[1]]\^2])\)}, {u[n, 
+              t] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\ \((1 + 
+                        Tanh[phase + n\ c[1] + 
+                            2\ aa\ t\ Sinh[c[1]]\^2])\)\)\/a[2, 1]\)\), 
+          v[n, t] \[Rule] 
+            a[2, 1]\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] + 
+                      2\ aa\ t\ Sinh[c[1]]\^2])\)}}, {}}\)], "Print"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\ \((\(-1\) + 
+                        Tanh[phase + n\ c[1] - 
+                            2\ aa\ t\ Sinh[c[1]]\^2])\)\)\/a[2, 1]\)\), 
+          v[n, t] \[Rule] 
+            a[2, 1]\ \((1 + 
+                  Tanh[phase + n\ c[1] - 2\ aa\ t\ Sinh[c[1]]\^2])\)}, {u[n, 
+              t] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\ \((1 + 
+                        Tanh[phase + n\ c[1] + 
+                            2\ aa\ t\ Sinh[c[1]]\^2])\)\)\/a[2, 1]\)\), 
+          v[n, t] \[Rule] 
+            a[2, 1]\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] + 
+                      2\ aa\ t\ Sinh[c[1]]\^2])\)}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]28.840999999999994`\),
+      SequenceForm[ "Time Used:", 28.840999999999994],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \(\*"\<\"\"\>"\)], "Print"],
+
+Cell[BoxData[
+    \("The (numerically and/or symbolically) tested solutions:"\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\ \((\(-1\) + 
+                        Tanh[phase + n\ c[1] - 
+                            2\ aa\ t\ Sinh[c[1]]\^2])\)\)\/a[2, 1]\)\), 
+          v[n, t] \[Rule] 
+            a[2, 1]\ \((1 + 
+                  Tanh[phase + n\ c[1] - 2\ aa\ t\ Sinh[c[1]]\^2])\)}, {u[n, 
+              t] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\ \((1 + 
+                        Tanh[phase + n\ c[1] + 
+                            2\ aa\ t\ Sinh[c[1]]\^2])\)\)\/a[2, 1]\)\), 
+          v[n, t] \[Rule] 
+            a[2, 1]\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] + 
+                      2\ aa\ t\ Sinh[c[1]]\^2])\)}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ NLS\ equation\ \((Ablowitz - 
+            Ladik\ discretization)\)\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, t], t]\  == 
+          aa*\((bb*u[n + 1, t] - 2*bb*u[n, t] + bb*u[n - 1, t])\) + 
+            u[n, t]*v[n, t]*\((bb*u[n + 1, t] + bb*u[n - 1, t])\), 
+        D[v[n, t], 
+            t]\  == \(-aa\)*\((bb*v[n + 1, t] - 2*bb*v[n, t] + 
+                  bb*v[n - 1, t])\) - 
+            u[n, t]*v[n, t]*\((bb*v[n + 1, t] + bb*v[n - 1, t])\)}, {u, 
+        v}, {n}, {t}, {aa, bb}]\)], "Input"],
+
+Cell[BoxData[
+    \(AnalyzeAndSolve::"soln" \(\(:\)\(\ \)\) 
+      "The solution \!\({\(\(\(\(a[\(\(1, 0\)\)]\)\) \[Rule] \(\(-\(\(\(4\\ \
+aa\)\/\(\((\(\(-1\)\) + \@2)\)\^2\\ \((1 + \@2)\)\^2\\ \(\(a[\(\(2, \
+2\)\)]\)\)\)\)\)\)\)\)\), \(\(\(\(a[\(\(2, 0\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(a[\(\(1, 2\)\)]\)\) \[Rule] \(8\\ aa\)\/\(\((\(\(-1\)\) + \@2)\)\^2\\ \
+\((1 + \@2)\)\^2\\ \(\(a[\(\(2, 2\)\)]\)\)\)\)\), \(\(\(\(a[\(\(1, 1\)\)]\)\) \
+\[Rule] \(\(-\(\(\(2\\ \(\(c[2]\)\)\)\/\(\(\((\(\(-1\)\) + \@2)\)\)\\ \(\((\(\
+\[LeftSkeleton] 1 \[RightSkeleton]\))\)\) \(\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\)\) \(\(\[LeftSkeleton] 2 \[RightSkeleton]\)\)\\ \
+\(\(a[\(\(2, 2\)\)]\)\)\)\)\)\)\)\)\), \(\(\(\(a[\(\(2, 1\)\)]\)\) \[Rule] \
+0\)\), \(\(\(\(Coth[\(\(c[1]\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(Tanh[\(\(c[1]\)\)]\)\) \[Rule] \(\(-\@2\)\)\)\)}\) is being removed \
+because it is inconsistent."\)], "Message"],
+
+Cell[BoxData[
+    \(AnalyzeAndSolve::"soln" \(\(:\)\(\ \)\) 
+      "The solution \!\({\(\(\(\(a[\(\(1, 0\)\)]\)\) \[Rule] \(\(-\(\(\(4\\ \
+aa\)\/\(\((\(\(-1\)\) + \@2)\)\^2\\ \((1 + \@2)\)\^2\\ \(\(a[\(\(2, \
+2\)\)]\)\)\)\)\)\)\)\)\), \(\(\(\(a[\(\(2, 0\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(a[\(\(1, 2\)\)]\)\) \[Rule] \(8\\ aa\)\/\(\((\(\(-1\)\) + \@2)\)\^2\\ \
+\((1 + \@2)\)\^2\\ \(\(a[\(\(2, 2\)\)]\)\)\)\)\), \(\(\(\(a[\(\(1, 1\)\)]\)\) \
+\[Rule] \(\(-\(\(\(2\\ \(\(c[2]\)\)\)\/\(\(\((\(\(-1\)\) + \@2)\)\)\\ \(\((\(\
+\[LeftSkeleton] 1 \[RightSkeleton]\))\)\) \(\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\)\) \(\(\[LeftSkeleton] 2 \[RightSkeleton]\)\)\\ \
+\(\(a[\(\(2, 2\)\)]\)\)\)\)\)\)\)\)\), \(\(\(\(a[\(\(2, 1\)\)]\)\) \[Rule] \
+0\)\), \(\(\(\(Coth[\(\(c[1]\)\)]\)\) \[Rule] 0\)\), \
+\(\(\(\(Tanh[\(\(c[1]\)\)]\)\) \[Rule] \@2\)\)}\) is being removed because it \
+is inconsistent."\)], "Message"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\ \((\(-1\) + 
+                        Tanh[phase + n\ c[1] - 
+                            2\ aa\ bb\ t\ Sinh[c[1]]\^2])\)\)\/a[2, 1]\)\), 
+          v[n, t] \[Rule] 
+            a[2, 1]\ \((1 + 
+                  Tanh[phase + n\ c[1] - 2\ aa\ bb\ t\ Sinh[c[1]]\^2])\)}, {u[
+              n, t] \[Rule] \(-\(\(aa\ Sinh[c[1]]\^2\ \((1 + 
+                        Tanh[phase + n\ c[1] + 
+                            2\ aa\ bb\ t\ Sinh[c[1]]\^2])\)\)\/a[2, 1]\)\), 
+          v[n, t] \[Rule] 
+            a[2, 1]\ \((\(-1\) + 
+                  Tanh[phase + n\ c[1] + 
+                      2\ aa\ bb\ t\ Sinh[c[1]]\^2])\)}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ Modified\ KdV\ equation\ \((with\ parameter)\)\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[
+      D[u[n, t], 
+          t] \[Equal] \((aa^2 - u[n, t]^2)\)*\((u[n + 1, t] - u[n - 1, t])\), 
+      u, {n}, {t}, {aa}, \ SymbolicTest\  \[Rule] \ False]\)], "Input"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, 
+              t] \[Rule] \(-aa\)\ Tanh[c[1]]\ Tanh[
+                phase + n\ c[1] + 2\ aa\^2\ t\ Tanh[c[1]]]}, {u[n, t] \[Rule] 
+            aa\ Tanh[c[1]]\ Tanh[
+                phase + n\ c[1] + 2\ aa\^2\ t\ Tanh[c[1]]]}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(\( (*\ 1 - D\ Volterra\ system\ *) \)\(\[IndentingNewLine]\)\( (*\ 
+      On\ the\ Dynamics\ of\ Rational\ Solutions\ for\ 1  
+        D\ Volterra\ System\ by\ A . \ S . \ 
+          Carstea\ in\ SIDE\ \(\(III\)\(.\)\)\ *) \)\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[q[n, t], 
+            t]\  \[Equal] \ \((a + b*q[n, t] - 
+                c*q[n, t]^2)\)*\((r[n + 1, t]\  - \ r[n - 1, t])\), 
+        D[r[n, t], \ 
+            t]\  \[Equal] \ \((a + b*r[n, t]\  - \ 
+                c*r[n, t]^2)\)*\((q[n + 1, t] - q[n - 1, t])\)}, {q, 
+        r}, {n}, {t}, {a, b, c}, \ SymbolicTest\  \[Rule] \ False]\)], "Input"],
+
+Cell[BoxData[
+    \("The potential solutions {{m[1] -> 1, m[2] -> 1}} are being removed \
+because they are underdetermined.  "\)], "Message"],
+
+Cell[BoxData[
+    \("The potential solutions {{m[1] -> 2, m[2] -> 2}} are being removed \
+because they are underdetermined.  "\)], "Message"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{q[n, 
+              t] \[Rule] \(\(-b\)\ a[2, 2] - c[2]\ Tanh[c[1]] + b\ a[2, 2]\ \
+Tanh[c[1]]\^2 + c[2]\ Tanh[c[1]]\^3\ Tanh[phase + n\ c[1] + t\ \
+c[2]]\^2\)\/\(2\ c\ a[2, 2]\ \((\(-1\) + Tanh[c[1]])\)\ \((1 + \
+Tanh[c[1]])\)\), 
+          r[n, t] \[Rule] \(b - 2\ c\ a[2, 2]\ Coth[c[1]]\^2 + 2\ c\ a[2, 2]\ \
+Tanh[phase + n\ c[1] + t\ c[2]]\^2\)\/\(2\ c\), 
+          a \[Rule] \(-\(b\^2\/\(4\ c\)\)\)}}, {{q[n, 
+              t] \[Rule] \(b - \@\(b\^2 + 4\ a\ c\)\ Tanh[c[1]]\ Tanh[\(2\ c\ \
+phase + 2\ c\ n\ c[1] - b\^2\ t\ Tanh[c[1]] - 4\ a\ c\ t\ Tanh[c[1]]\)\/\(2\ \
+c\)]\)\/\(2\ c\), 
+          r[n, t] \[Rule] \(b + \@\(b\^2 + 4\ a\ c\)\ Tanh[c[1]]\ Tanh[\(2\ c\
+\ phase + 2\ c\ n\ c[1] - b\^2\ t\ Tanh[c[1]] - 4\ a\ c\ t\ Tanh[c[1]]\)\/\(2\
+\ c\)]\)\/\(2\ c\)}, {q[n, 
+              t] \[Rule] \(b + \@\(b\^2 + 4\ a\ c\)\ Tanh[c[1]]\ Tanh[\(2\ c\ \
+phase + 2\ c\ n\ c[1] - b\^2\ t\ Tanh[c[1]] - 4\ a\ c\ t\ Tanh[c[1]]\)\/\(2\ \
+c\)]\)\/\(2\ c\), 
+          r[n, t] \[Rule] \(b - \@\(b\^2 + 4\ a\ c\)\ Tanh[c[1]]\ Tanh[\(2\ c\
+\ phase + 2\ c\ n\ c[1] - b\^2\ t\ Tanh[c[1]] - 4\ a\ c\ t\ Tanh[c[1]]\)\/\(2\
+\ c\)]\)\/\(2\ c\)}, {q[n, 
+              t] \[Rule] \(b - \@\(b\^2 + 4\ a\ c\)\ Tanh[c[1]]\ Tanh[\(2\ c\ \
+phase + 2\ c\ n\ c[1] + b\^2\ t\ Tanh[c[1]] + 4\ a\ c\ t\ Tanh[c[1]]\)\/\(2\ \
+c\)]\)\/\(2\ c\), 
+          r[n, t] \[Rule] \(b - \@\(b\^2 + 4\ a\ c\)\ Tanh[c[1]]\ Tanh[\(2\ c\
+\ phase + 2\ c\ n\ c[1] + b\^2\ t\ Tanh[c[1]] + 4\ a\ c\ t\ Tanh[c[1]]\)\/\(2\
+\ c\)]\)\/\(2\ c\)}, {q[n, 
+              t] \[Rule] \(b + \@\(b\^2 + 4\ a\ c\)\ Tanh[c[1]]\ Tanh[\(2\ c\ \
+phase + 2\ c\ n\ c[1] + b\^2\ t\ Tanh[c[1]] + 4\ a\ c\ t\ Tanh[c[1]]\)\/\(2\ \
+c\)]\)\/\(2\ c\), 
+          r[n, t] \[Rule] \(b + \@\(b\^2 + 4\ a\ c\)\ Tanh[c[1]]\ Tanh[\(2\ c\
+\ phase + 2\ c\ n\ c[1] + b\^2\ t\ Tanh[c[1]] + 4\ a\ c\ t\ Tanh[c[1]]\)\/\(2\
+\ c\)]\)\/\(2\ c\)}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(\( (*\ 
+      Self - dual\ nonlinear\ network\ equation\ *) \)\(\[IndentingNewLine]\)\
+\( (*\ Time - 
+        discretization\ of\ soliton\ equations\ by\ Ryogo\ Hirota\ and\ \
+Masataka\ Iwao\ in\ SIDE\ \(\(III\)\(.\)\)\ *) \)\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[
+      D[v[n, t], 
+          t]\  \[Equal] \ \((1 - v[n, t]^2)\)*\((v[n - 1, t]\  - \ 
+              v[n + 1, t])\), v, n, t, {}, \ Verbose\  \[Rule] \ True, \ 
+      SymbolicTest\  \[Rule] \ False]\)], "Input"],
+
+Cell[BoxData[
+    \("The given system of differential-difference equations: "\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        InterpretationBox[
+          RowBox[{"v", "\[InvisibleSpace]", 
+            InterpretationBox[
+              SubscriptBox["\[Null]", 
+                
+                InterpretationBox[\(n\[InvisibleSpace]";"\[InvisibleSpace]t\),
+                  
+                  SequenceForm[ n, ";", t],
+                  Editable->False]],
+              Subscript[ 
+                SequenceForm[ n, ";", t]],
+              Editable->False]}],
+          SequenceForm[ v, 
+            Subscript[ 
+              SequenceForm[ n, ";", t]]],
+          Editable->False], 
+        "\[Equal]", \(\((1 - v\_n\%2)\)\ \((v\_\(\(-1\) + n\) - 
+              v\_\(1 + n\))\)\)}], "}"}]], "Print"],
+
+Cell[BoxData[
+    \("Transform the system of differential-difference equations into \
+nonlinear DDEs in T = Tanh."\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{\(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}]}], "-", 
+        RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}]}], 
+        "-", \(\(\(u[1]\)[\(-1\) + n]\)[T]\), 
+        "+", \(\(\(u[1]\)[\(-1\) + n]\)[T]\ \(\(u[1]\)[n]\)[T]\^2\), 
+        "+", \(\(\(u[1]\)[1 + n]\)[T]\), 
+        "-", \(\(\(u[1]\)[n]\)[T]\^2\ \(\(u[1]\)[1 + n]\)[T]\)}], 
+      "}"}]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.0700000000000216`\),
+      SequenceForm[ "Time Used:", .0700000000000216],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Determine the maximal degree of the polynomial solutions in T."\)], \
+"Print"],
+
+Cell[BoxData[
+    \({{m[1] \[Rule] 1}, {m[1] \[Rule] 2}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.3709999999999809`\),
+      SequenceForm[ "Time Used:", .3709999999999809],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Derive the nonlinear algebraic system for the coefficients."\)], \
+"Print"],
+
+Cell[BoxData[
+    \("Seek polynomial solutions in T of the form:"\)], "Print"],
+
+Cell[BoxData[
+    \({{\(\(u[1]\)[n]\)[T] \[Rule] 
+          a[1, 0] + T\ a[1, 1]}, {\(\(u[1]\)[n]\)[T] \[Rule] 
+          a[1, 0] + T\ a[1, 1] + T\^2\ a[1, 2]}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("where T = Tanh["\[InvisibleSpace]\(phase + n\ c[1] + 
+          t\ c[2]\)\[InvisibleSpace]"]."\),
+      SequenceForm[ "where T = Tanh[", 
+        Plus[ phase, 
+          Times[ n, 
+            c[ 1]], 
+          Times[ t, 
+            c[ 2]]], "]."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("The nonlinear algebraic system is: "\)], "Print"],
+
+Cell[BoxData[
+    \({{{2\ a[1, 1]\^2 + c[2]\ Tanh[c[1]] \[Equal] 0, 
+          c[2] + 2\ Tanh[c[1]] - 2\ a[1, 0]\^2\ Tanh[c[1]] \[Equal] 0, 
+          a[1, 0] \[Equal] 0, a[1, 0] \[Equal] 0, 
+          c[2] + 2\ Tanh[c[1]] - 2\ a[1, 0]\^2\ Tanh[c[1]] + 
+              2\ a[1, 1]\^2\ Tanh[c[1]] + c[2]\ Tanh[c[1]]\^2 \[Equal] 0}, {a[
+            1, 1], a[1, 0]}, {Tanh[c[1]], c[2]}, {}, {a[1, 1], Tanh[c[1]], 
+          c[2]}}, {{a[1, 
+                1]\ \((c[2] + 2\ Tanh[c[1]] - 
+                  2\ a[1, 0]\^2\ Tanh[c[1]])\) \[Equal] 0, 
+          a[1, 1] \[Equal] 
+            0, \(-2\)\ a[1, 2]\^2 + 2\ a[1, 1]\^2\ Tanh[c[1]]\^2 + 
+              2\ a[1, 2]\^2\ Tanh[c[1]]\^2 + c[2]\ Tanh[c[1]]\^3 \[Equal] 0, 
+          a[1, 1]\ \((\(-10\)\ a[1, 2]\^2 + 2\ a[1, 1]\^2\ Tanh[c[1]]\^2 + 
+                  4\ a[1, 0]\ a[1, 2]\ Tanh[c[1]]\^2 + 
+                  6\ a[1, 2]\^2\ Tanh[c[1]]\^2 + 
+                  c[2]\ Tanh[c[1]]\^3)\) \[Equal] 0, 
+          a[1, 2]\ c[2] - 2\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]] + 
+              2\ a[1, 2]\ Tanh[c[1]] - 2\ a[1, 0]\^2\ a[1, 2]\ Tanh[c[1]] - 
+              2\ a[1, 2]\ Tanh[c[1]]\^3 + 
+              2\ a[1, 0]\^2\ a[1, 2]\ Tanh[c[1]]\^3 \[Equal] 0, 
+          4\ a[1, 1]\^2\ a[1, 2] + 4\ a[1, 0]\ a[1, 2]\^2 - 2\ a[1, 2]\^3 + 
+              2\ a[1, 2]\ c[2]\ Tanh[c[1]] - 
+              2\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^2 - 
+              4\ a[1, 0]\ a[1, 2]\^2\ Tanh[c[1]]\^2 + 
+              2\ a[1, 2]\^3\ Tanh[c[1]]\^2 + 
+              a[1, 2]\ c[2]\ Tanh[c[1]]\^3 \[Equal] 0, 
+          a[1, 1]\ \((c[2] + 2\ Tanh[c[1]] - 2\ a[1, 0]\^2\ Tanh[c[1]] + 
+                  2\ a[1, 1]\^2\ Tanh[c[1]] + 
+                  12\ a[1, 0]\ a[1, 2]\ Tanh[c[1]] + 2\ c[2]\ Tanh[c[1]]\^2 + 
+                  2\ Tanh[c[1]]\^3 - 2\ a[1, 0]\^2\ Tanh[c[1]]\^3 - 
+                  8\ a[1, 0]\ a[1, 2]\ Tanh[c[1]]\^3)\) \[Equal] 0, 
+          a[1, 1]\ \((2\ a[1, 1]\^2 + 12\ a[1, 0]\ a[1, 2] - 10\ a[1, 2]\^2 + 
+                  2\ c[2]\ Tanh[c[1]] + 2\ Tanh[c[1]]\^2 - 
+                  2\ a[1, 0]\^2\ Tanh[c[1]]\^2 + 
+                  2\ a[1, 1]\^2\ Tanh[c[1]]\^2 - 
+                  4\ a[1, 0]\ a[1, 2]\ Tanh[c[1]]\^2 + 
+                  8\ a[1, 2]\^2\ Tanh[c[1]]\^2 + 
+                  c[2]\ Tanh[c[1]]\^3)\) \[Equal] 
+            0, \(-a[1, 2]\)\ c[2] + 2\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]] - 
+              2\ a[1, 2]\ Tanh[c[1]] + 2\ a[1, 0]\^2\ a[1, 2]\ Tanh[c[1]] - 
+              4\ a[1, 1]\^2\ a[1, 2]\ Tanh[c[1]] - 
+              4\ a[1, 0]\ a[1, 2]\^2\ Tanh[c[1]] - 
+              2\ a[1, 2]\ c[2]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^3 + 
+              2\ a[1, 2]\ Tanh[c[1]]\^3 - 
+              2\ a[1, 0]\^2\ a[1, 2]\ Tanh[c[1]]\^3 + 
+              2\ a[1, 1]\^2\ a[1, 2]\ Tanh[c[1]]\^3 + 
+              4\ a[1, 0]\ a[1, 2]\^2\ Tanh[c[1]]\^3 \[Equal] 0}, {a[1, 2], 
+          a[1, 1], a[1, 0]}, {Tanh[c[1]], c[2]}, {}, {a[1, 2], Tanh[c[1]], 
+          c[2]}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.8910000000000196`\),
+      SequenceForm[ "Time Used:", .89100000000001955],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Solve the nonlinear algebraic system."\)], "Print"],
+
+Cell[BoxData[
+    \({{{a[1, 0] \[Rule] 0, c[2] \[Rule] \(-2\)\ Tanh[c[1]], 
+          a[1, 1] \[Rule] \(-Tanh[c[1]]\)}, {a[1, 0] \[Rule] 0, 
+          c[2] \[Rule] \(-2\)\ Tanh[c[1]], 
+          a[1, 1] \[Rule] Tanh[c[1]]}}, {}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]2.383999999999986`\),
+      SequenceForm[ "Time Used:", 2.3839999999999861],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Build and test the travelling wave solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("The possible non-trivial solutions (before any testing): "\)], "Print"],
+
+Cell[BoxData[
+    \({{{v[n, 
+              t] \[Rule] \(-Tanh[c[1]]\)\ Tanh[
+                phase + n\ c[1] - 2\ t\ Tanh[c[1]]]}, {v[n, t] \[Rule] 
+            Tanh[c[1]]\ Tanh[
+                phase + n\ c[1] - 2\ t\ Tanh[c[1]]]}}, {}}\)], "Print"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{v[n, 
+              t] \[Rule] \(-Tanh[c[1]]\)\ Tanh[
+                phase + n\ c[1] - 2\ t\ Tanh[c[1]]]}, {v[n, t] \[Rule] 
+            Tanh[c[1]]\ Tanh[
+                phase + n\ c[1] - 2\ t\ Tanh[c[1]]]}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.060000000000002274`\),
+      SequenceForm[ "Time Used:", .060000000000002274],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \(\*"\<\"\"\>"\)], "Print"],
+
+Cell[BoxData[
+    \("The (numerically and/or symbolically) tested solutions:"\)], "Print"],
+
+Cell[BoxData[
+    \({{{v[n, 
+              t] \[Rule] \(-Tanh[c[1]]\)\ Tanh[
+                phase + n\ c[1] - 2\ t\ Tanh[c[1]]]}, {v[n, t] \[Rule] 
+            Tanh[c[1]]\ Tanh[
+                phase + n\ c[1] - 2\ t\ Tanh[c[1]]]}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(\( (*\ Hybrid\ equation\ *) \)\(\[IndentingNewLine]\)\( (*\ 
+      Time - discretization\ of\ soliton\ equations\ by\ Ryogo\ Hirota\ and\ \
+Masataka\ Iwao\ in\ SIDE\ \(\(III\)\(.\)\)\ *) \)\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[
+      D[w[n, t], 
+          t]\  \[Equal] \ \((1 + b*w[n, t] + 
+              c*w[n, t]^2)\)*\((w[n - 1, t]\  - \ w[n + 1, t])\), w, n, 
+      t, {b, c}, \ Verbose\  \[Rule] \ True, \ 
+      SymbolicTest\  \[Rule] \ False]\)], "Input"],
+
+Cell[BoxData[
+    \("The given system of differential-difference equations: "\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        InterpretationBox[
+          RowBox[{"w", "\[InvisibleSpace]", 
+            InterpretationBox[
+              SubscriptBox["\[Null]", 
+                
+                InterpretationBox[\(n\[InvisibleSpace]";"\[InvisibleSpace]t\),
+                  
+                  SequenceForm[ n, ";", t],
+                  Editable->False]],
+              Subscript[ 
+                SequenceForm[ n, ";", t]],
+              Editable->False]}],
+          SequenceForm[ w, 
+            Subscript[ 
+              SequenceForm[ n, ";", t]]],
+          Editable->False], 
+        "\[Equal]", \(\((1 + b\ w\_n + c\ w\_n\%2)\)\ \((w\_\(\(-1\) + n\) - 
+              w\_\(1 + n\))\)\)}], "}"}]], "Print"],
+
+Cell[BoxData[
+    \("Transform the system of differential-difference equations into \
+nonlinear DDEs in T = Tanh."\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{\(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}]}], "-", 
+        RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}]}], 
+        "-", \(\(\(u[1]\)[\(-1\) + n]\)[T]\), 
+        "-", \(b\ \(\(u[1]\)[\(-1\) + n]\)[T]\ \(\(u[1]\)[n]\)[T]\), 
+        "-", \(c\ \(\(u[1]\)[\(-1\) + n]\)[T]\ \(\(u[1]\)[n]\)[T]\^2\), 
+        "+", \(\(\(u[1]\)[1 + n]\)[T]\), 
+        "+", \(b\ \(\(u[1]\)[n]\)[T]\ \(\(u[1]\)[1 + n]\)[T]\), 
+        "+", \(c\ \(\(u[1]\)[n]\)[T]\^2\ \(\(u[1]\)[1 + n]\)[T]\)}], 
+      "}"}]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.09999999999999432`\),
+      SequenceForm[ "Time Used:", .099999999999994316],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Determine the maximal degree of the polynomial solutions in T."\)], \
+"Print"],
+
+Cell[BoxData[
+    \({{m[1] \[Rule] 1}, {m[1] \[Rule] 2}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.5910000000000082`\),
+      SequenceForm[ "Time Used:", .59100000000000819],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Derive the nonlinear algebraic system for the coefficients."\)], \
+"Print"],
+
+Cell[BoxData[
+    \("Seek polynomial solutions in T of the form:"\)], "Print"],
+
+Cell[BoxData[
+    \({{\(\(u[1]\)[n]\)[T] \[Rule] 
+          a[1, 0] + T\ a[1, 1]}, {\(\(u[1]\)[n]\)[T] \[Rule] 
+          a[1, 0] + T\ a[1, 1] + T\^2\ a[1, 2]}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("where T = Tanh["\[InvisibleSpace]\(phase + n\ c[1] + 
+          t\ c[2]\)\[InvisibleSpace]"]."\),
+      SequenceForm[ "where T = Tanh[", 
+        Plus[ phase, 
+          Times[ n, 
+            c[ 1]], 
+          Times[ t, 
+            c[ 2]]], "]."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("The nonlinear algebraic system is: "\)], "Print"],
+
+Cell[BoxData[
+    \({{{b + 2\ c\ a[1, 0] \[Equal] 0, b + 2\ c\ a[1, 0] \[Equal] 0, 
+          2\ c\ a[1, 1]\^2 - c[2]\ Tanh[c[1]] \[Equal] 0, 
+          c[2] + 2\ Tanh[c[1]] + 2\ b\ a[1, 0]\ Tanh[c[1]] + 
+              2\ c\ a[1, 0]\^2\ Tanh[c[1]] \[Equal] 
+            0, \(-c[2]\) - 2\ Tanh[c[1]] - 2\ b\ a[1, 0]\ Tanh[c[1]] - 
+              2\ c\ a[1, 0]\^2\ Tanh[c[1]] + 2\ c\ a[1, 1]\^2\ Tanh[c[1]] - 
+              c[2]\ Tanh[c[1]]\^2 \[Equal] 0}, {a[1, 1], 
+          a[1, 0]}, {Tanh[c[1]], c[2]}, {b, c}, {b, c, a[1, 1], Tanh[c[1]], 
+          c[2]}}, {{a[1, 
+                1]\ \((c[2] + 2\ Tanh[c[1]] + 2\ b\ a[1, 0]\ Tanh[c[1]] + 
+                  2\ c\ a[1, 0]\^2\ Tanh[c[1]])\) \[Equal] 
+            0, \(-2\)\ c\ a[1, 2]\^2 + 2\ c\ a[1, 1]\^2\ Tanh[c[1]]\^2 + 
+              2\ c\ a[1, 2]\^2\ Tanh[c[1]]\^2 - c[2]\ Tanh[c[1]]\^3 \[Equal] 
+            0, a[1, 1] \[Equal] 0, 
+          a[1, 1]\ \((\(-10\)\ c\ a[1, 2]\^2 + 
+                  2\ c\ a[1, 1]\^2\ Tanh[c[1]]\^2 + 
+                  2\ b\ a[1, 2]\ Tanh[c[1]]\^2 + 
+                  4\ c\ a[1, 0]\ a[1, 2]\ Tanh[c[1]]\^2 + 
+                  6\ c\ a[1, 2]\^2\ Tanh[c[1]]\^2 - 
+                  c[2]\ Tanh[c[1]]\^3)\) \[Equal] 0, 
+          a[1, 2]\ c[2] + b\ a[1, 1]\^2\ Tanh[c[1]] + 
+              2\ c\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]] + 
+              2\ a[1, 2]\ Tanh[c[1]] + 2\ b\ a[1, 0]\ a[1, 2]\ Tanh[c[1]] + 
+              2\ c\ a[1, 0]\^2\ a[1, 2]\ Tanh[c[1]] - 
+              2\ a[1, 2]\ Tanh[c[1]]\^3 - 
+              2\ b\ a[1, 0]\ a[1, 2]\ Tanh[c[1]]\^3 - 
+              2\ c\ a[1, 0]\^2\ a[1, 2]\ Tanh[c[1]]\^3 \[Equal] 0, 
+          4\ c\ a[1, 1]\^2\ a[1, 2] + 2\ b\ a[1, 2]\^2 + 
+              4\ c\ a[1, 0]\ a[1, 2]\^2 - 2\ c\ a[1, 2]\^3 - 
+              2\ a[1, 2]\ c[2]\ Tanh[c[1]] - b\ a[1, 1]\^2\ Tanh[c[1]]\^2 - 
+              2\ c\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^2 - 
+              2\ b\ a[1, 2]\^2\ Tanh[c[1]]\^2 - 
+              4\ c\ a[1, 0]\ a[1, 2]\^2\ Tanh[c[1]]\^2 + 
+              2\ c\ a[1, 2]\^3\ Tanh[c[1]]\^2 - 
+              a[1, 2]\ c[2]\ Tanh[c[1]]\^3 \[Equal] 0, 
+          a[1, 1]\ \((\(-c[2]\) - 2\ Tanh[c[1]] - 2\ b\ a[1, 0]\ Tanh[c[1]] - 
+                  2\ c\ a[1, 0]\^2\ Tanh[c[1]] + 
+                  2\ c\ a[1, 1]\^2\ Tanh[c[1]] + 6\ b\ a[1, 2]\ Tanh[c[1]] + 
+                  12\ c\ a[1, 0]\ a[1, 2]\ Tanh[c[1]] - 
+                  2\ c[2]\ Tanh[c[1]]\^2 - 2\ Tanh[c[1]]\^3 - 
+                  2\ b\ a[1, 0]\ Tanh[c[1]]\^3 - 
+                  2\ c\ a[1, 0]\^2\ Tanh[c[1]]\^3 - 
+                  4\ b\ a[1, 2]\ Tanh[c[1]]\^3 - 
+                  8\ c\ a[1, 0]\ a[1, 2]\ Tanh[c[1]]\^3)\) \[Equal] 0, 
+          a[1, 1]\ \((2\ c\ a[1, 1]\^2 + 6\ b\ a[1, 2] + 
+                  12\ c\ a[1, 0]\ a[1, 2] - 10\ c\ a[1, 2]\^2 - 
+                  2\ c[2]\ Tanh[c[1]] - 2\ Tanh[c[1]]\^2 - 
+                  2\ b\ a[1, 0]\ Tanh[c[1]]\^2 - 
+                  2\ c\ a[1, 0]\^2\ Tanh[c[1]]\^2 + 
+                  2\ c\ a[1, 1]\^2\ Tanh[c[1]]\^2 - 
+                  2\ b\ a[1, 2]\ Tanh[c[1]]\^2 - 
+                  4\ c\ a[1, 0]\ a[1, 2]\ Tanh[c[1]]\^2 + 
+                  8\ c\ a[1, 2]\^2\ Tanh[c[1]]\^2 - 
+                  c[2]\ Tanh[c[1]]\^3)\) \[Equal] 0, 
+          a[1, 2]\ c[2] + b\ a[1, 1]\^2\ Tanh[c[1]] + 
+              2\ c\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]] + 
+              2\ a[1, 2]\ Tanh[c[1]] + 2\ b\ a[1, 0]\ a[1, 2]\ Tanh[c[1]] + 
+              2\ c\ a[1, 0]\^2\ a[1, 2]\ Tanh[c[1]] - 
+              4\ c\ a[1, 1]\^2\ a[1, 2]\ Tanh[c[1]] - 
+              2\ b\ a[1, 2]\^2\ Tanh[c[1]] - 
+              4\ c\ a[1, 0]\ a[1, 2]\^2\ Tanh[c[1]] + 
+              2\ a[1, 2]\ c[2]\ Tanh[c[1]]\^2 + 
+              b\ a[1, 1]\^2\ Tanh[c[1]]\^3 + 
+              2\ c\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^3 - 
+              2\ a[1, 2]\ Tanh[c[1]]\^3 - 
+              2\ b\ a[1, 0]\ a[1, 2]\ Tanh[c[1]]\^3 - 
+              2\ c\ a[1, 0]\^2\ a[1, 2]\ Tanh[c[1]]\^3 + 
+              2\ c\ a[1, 1]\^2\ a[1, 2]\ Tanh[c[1]]\^3 + 
+              2\ b\ a[1, 2]\^2\ Tanh[c[1]]\^3 + 
+              4\ c\ a[1, 0]\ a[1, 2]\^2\ Tanh[c[1]]\^3 \[Equal] 0}, {a[1, 2], 
+          a[1, 1], a[1, 0]}, {Tanh[c[1]], c[2]}, {b, c}, {b, c, a[1, 2], 
+          Tanh[c[1]], c[2]}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]1.372000000000014`\),
+      SequenceForm[ "Time Used:", 1.3720000000000141],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Solve the nonlinear algebraic system."\)], "Print"],
+
+Cell[BoxData[
+    \({{{a[1, 0] \[Rule] \(-\(b\/\(2\ c\)\)\), 
+          a[1, 1] \[Rule] \(-\(\(\@Tanh[c[1]]\ \@\(\(\((b\^2 - 4\ c)\)\ \
+Tanh[c[1]]\)\/c\)\)\/\(2\ \@c\)\)\), 
+          c[2] \[Rule] \(\((b\^2 - 4\ c)\)\ Tanh[c[1]]\)\/\(2\ c\)}, {a[1, 
+              0] \[Rule] \(-\(b\/\(2\ c\)\)\), 
+          a[1, 1] \[Rule] \(\@Tanh[c[1]]\ \@\(\(\((b\^2 - 4\ c)\)\ Tanh[c[1]]\
+\)\/c\)\)\/\(2\ \@c\), 
+          c[2] \[Rule] \(\((b\^2 - 4\ c)\)\ Tanh[c[1]]\)\/\(2\ c\)}}, {{a[1, 
+              1] \[Rule] 0, 
+          a[1, 2] \[Rule] \(-\(\(\@2\ \@c[2]\ Tanh[c[1]]\^\(3/2\)\)\/\@\(b\^2\
+\ \((\(-1\) + Tanh[c[1]])\)\ \((1 + Tanh[c[1]])\)\)\)\), 
+          a[1, 0] \[Rule] \(-\(\(\(-\@2\)\ b\ \@c[2] + 
+                    2\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \
+\((1 + Tanh[c[1]])\)\)\)\/\(b\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + \
+Tanh[c[1]])\)\ \((1 + Tanh[c[1]])\)\)\)\)\), 
+          c \[Rule] b\^2\/4}, {a[1, 1] \[Rule] 0, 
+          a[1, 2] \[Rule] \(\@2\ \@c[2]\ Tanh[c[1]]\^\(3/2\)\)\/\@\(b\^2\ \((\
+\(-1\) + Tanh[c[1]])\)\ \((1 + Tanh[c[1]])\)\), 
+          a[1, 0] \[Rule] \(-\(\(\@2\ b\ \@c[2] + 
+                    2\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \
+\((1 + Tanh[c[1]])\)\)\)\/\(b\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + \
+Tanh[c[1]])\)\ \((1 + Tanh[c[1]])\)\)\)\)\), c \[Rule] b\^2\/4}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]5.617999999999995`\),
+      SequenceForm[ "Time Used:", 5.617999999999995],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Build and test the travelling wave solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("The possible non-trivial solutions (before any testing): "\)], "Print"],
+
+Cell[BoxData[
+    \({{{w[n, 
+              t] \[Rule] \(-\(\(b - \@c\ \@Tanh[c[1]]\ \@\(\(\((b\^2 - 4\ \
+c)\)\ Tanh[c[1]]\)\/c\)\ Tanh[\(2\ c\ phase + 2\ c\ n\ c[1] + b\^2\ t\ \
+Tanh[c[1]] - 4\ c\ t\ Tanh[c[1]]\)\/\(2\ c\)]\)\/\(2\ c\)\)\)}, {w[n, 
+              t] \[Rule] \(-\(\(b + \@c\ \@Tanh[c[1]]\ \@\(\(\((b\^2 - 4\ \
+c)\)\ Tanh[c[1]]\)\/c\)\ Tanh[\(2\ c\ phase + 2\ c\ n\ c[1] + b\^2\ t\ \
+Tanh[c[1]] - 4\ c\ t\ Tanh[c[1]]\)\/\(2\ c\)]\)\/\(2\ c\)\)\)}}, {{w[n, 
+              t] \[Rule] \((\(-\@2\)\ b\ \@c[2] - 
+                  2\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \((1 \
++ Tanh[c[1]])\)\) + \@2\ b\ \@c[2]\ Tanh[c[1]]\^2\ Tanh[phase + n\ c[1] + t\ \
+c[2]]\^2)\)/\((b\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \((1 + \
+Tanh[c[1]])\)\))\), 
+          c \[Rule] 
+            b\^2\/4}, {w[n, 
+              t] \[Rule] \(-\(\((\(-\@2\)\ b\ \@c[2] + 
+                    2\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \
+\((1 + Tanh[c[1]])\)\) + \@2\ b\ \@c[2]\ Tanh[c[1]]\^2\ Tanh[phase + n\ c[1] \
++ t\ c[2]]\^2)\)/\((b\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \
+\((1 + Tanh[c[1]])\)\))\)\)\), c \[Rule] b\^2\/4}}}\)], "Print"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{w[n, 
+              t] \[Rule] \(-\(\(b - \@c\ \@Tanh[c[1]]\ \@\(\(\((b\^2 - 4\ \
+c)\)\ Tanh[c[1]]\)\/c\)\ Tanh[\(2\ c\ phase + 2\ c\ n\ c[1] + b\^2\ t\ \
+Tanh[c[1]] - 4\ c\ t\ Tanh[c[1]]\)\/\(2\ c\)]\)\/\(2\ c\)\)\)}, {w[n, 
+              t] \[Rule] \(-\(\(b + \@c\ \@Tanh[c[1]]\ \@\(\(\((b\^2 - 4\ \
+c)\)\ Tanh[c[1]]\)\/c\)\ Tanh[\(2\ c\ phase + 2\ c\ n\ c[1] + b\^2\ t\ \
+Tanh[c[1]] - 4\ c\ t\ Tanh[c[1]]\)\/\(2\ c\)]\)\/\(2\ c\)\)\)}}, {{w[n, 
+              t] \[Rule] \((\(-\@2\)\ b\ \@c[2] - 
+                  2\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \((1 \
++ Tanh[c[1]])\)\) + \@2\ b\ \@c[2]\ Tanh[c[1]]\^2\ Tanh[phase + n\ c[1] + t\ \
+c[2]]\^2)\)/\((b\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \((1 + \
+Tanh[c[1]])\)\))\), 
+          c \[Rule] 
+            b\^2\/4}, {w[n, 
+              t] \[Rule] \(-\(\((\(-\@2\)\ b\ \@c[2] + 
+                    2\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \
+\((1 + Tanh[c[1]])\)\) + \@2\ b\ \@c[2]\ Tanh[c[1]]\^2\ Tanh[phase + n\ c[1] \
++ t\ c[2]]\^2)\)/\((b\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \
+\((1 + Tanh[c[1]])\)\))\)\)\), c \[Rule] b\^2\/4}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]2.1430000000000007`\),
+      SequenceForm[ "Time Used:", 2.1430000000000007],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \(\*"\<\"\"\>"\)], "Print"],
+
+Cell[BoxData[
+    \("The (numerically and/or symbolically) tested solutions:"\)], "Print"],
+
+Cell[BoxData[
+    \({{{w[n, 
+              t] \[Rule] \(-\(\(b - \@c\ \@Tanh[c[1]]\ \@\(\(\((b\^2 - 4\ \
+c)\)\ Tanh[c[1]]\)\/c\)\ Tanh[\(2\ c\ phase + 2\ c\ n\ c[1] + b\^2\ t\ \
+Tanh[c[1]] - 4\ c\ t\ Tanh[c[1]]\)\/\(2\ c\)]\)\/\(2\ c\)\)\)}, {w[n, 
+              t] \[Rule] \(-\(\(b + \@c\ \@Tanh[c[1]]\ \@\(\(\((b\^2 - 4\ \
+c)\)\ Tanh[c[1]]\)\/c\)\ Tanh[\(2\ c\ phase + 2\ c\ n\ c[1] + b\^2\ t\ \
+Tanh[c[1]] - 4\ c\ t\ Tanh[c[1]]\)\/\(2\ c\)]\)\/\(2\ c\)\)\)}}, {{w[n, 
+              t] \[Rule] \((\(-\@2\)\ b\ \@c[2] - 
+                  2\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \((1 \
++ Tanh[c[1]])\)\) + \@2\ b\ \@c[2]\ Tanh[c[1]]\^2\ Tanh[phase + n\ c[1] + t\ \
+c[2]]\^2)\)/\((b\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \((1 + \
+Tanh[c[1]])\)\))\), 
+          c \[Rule] 
+            b\^2\/4}, {w[n, 
+              t] \[Rule] \(-\(\((\(-\@2\)\ b\ \@c[2] + 
+                    2\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \
+\((1 + Tanh[c[1]])\)\) + \@2\ b\ \@c[2]\ Tanh[c[1]]\^2\ Tanh[phase + n\ c[1] \
++ t\ c[2]]\^2)\)/\((b\ \@Tanh[c[1]]\ \@\(b\^2\ \((\(-1\) + Tanh[c[1]])\)\ \
+\((1 + Tanh[c[1]])\)\))\)\)\), c \[Rule] b\^2\/4}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ \((1 + 2)\) - dimensional\ Toda\ equations\ *) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[
+      D[s[n, x, t], \ x, 
+          t]\  \[Equal] \ \((s[n - 1, x, t]\  - \ 2*s[n, x, t] + 
+              s[n + 1, x, t])\)*\((D[s[n, x, t], t]\  + \ 1)\), s, 
+      n, \ {x, \ t}, {}]\)], "Input"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{s[n, x, 
+              t] \[Rule] \(a[1, 0]\ c[3] + Sinh[c[1]]\^2\ Tanh[\(phase\ c[3] \
++ n\ c[1]\ c[3] + t\ c[3]\^2 + x\ Sinh[c[1]]\^2\)\/c[3]]\)\/c[3]}}}\)], \
+"Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DDESpecialSolutions[{D[u[n, x, t], \ t]\  \[Equal] \ v[n, x, t], \ 
+        D[v[n, x, t], \ 
+            x]\  \[Equal] \ \((u[n - 1, x, t]\  - \ 2*u[n, x, t] + 
+                u[n + 1, x, t])\)*\((v[n, x, t]\  + \ 1)\)}, {u, v}, 
+      n, \ {x, \ t}, {}]\)], "Input"],
+
+Cell[BoxData[
+    \(DDESpecialSolutionsmSolver::"remove" \(\(:\)\(\ \)\) 
+      "The potential solutions \!\({\({\(\(\(\(m[1]\)\) \[Rule] \
+\(\(-1\)\)\)\), \(\(\(\(m[2]\)\) \[Rule] 0\)\)}\)}\) are being removed \
+because they are (i) negative, (ii) contain freedom, (iii) fail to balance \
+highest exponent terms from two different terms in the original system.  If \
+\!\(M\_i\) < 0, then the transformation u -> 1/v may result in a system that \
+DDESpecialSolutions can solve."\)], "Message"],
+
+Cell[BoxData[
+    \(DDESpecialSolutionsmSolver::"remove" \(\(:\)\(\ \)\) 
+      "The potential solutions \!\({\({\(\(\(\(m[1]\)\) \[Rule] \
+\(\(-1\)\)\)\), \(\(\(\(m[2]\)\) \[Rule] 0\)\)}\)}\) are being removed \
+because they are (i) negative, (ii) contain freedom, (iii) fail to balance \
+highest exponent terms from two different terms in the original system.  If \
+\!\(M\_i\) < 0, then the transformation u -> 1/v may result in a system that \
+DDESpecialSolutions can solve."\)], "Message"],
+
+Cell[BoxData[
+    \("Numerically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \("Symbolically test the solutions."\)], "Print"],
+
+Cell[BoxData[
+    \({{{u[n, x, 
+              t] \[Rule] \(a[1, 0]\ c[3] + Sinh[c[1]]\^2\ Tanh[\(phase\ c[3] \
++ n\ c[1]\ c[3] + t\ c[3]\^2 + x\ Sinh[c[1]]\^2\)\/c[3]]\)\/c[3], 
+          v[n, x, t] \[Rule] \(-Sinh[c[1]]\^2\)\ \((\(-1\) + 
+                  Tanh[\(phase\ c[3] + n\ c[1]\ c[3] + t\ c[3]\^2 + x\ \
+Sinh[c[1]]\^2\)\/c[3]])\)\ \((1 + 
+                  Tanh[\(phase\ c[3] + n\ c[1]\ c[3] + t\ c[3]\^2 + x\ \
+Sinh[c[1]]\^2\)\/c[3]])\)}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \( (*\ Nonlinear\ DDE\ related\ to\ the\ discrete\ sine - 
+        Gordon\ equation . \ Currently, 
+      the\ solver\ cannot\ solve\ the\ system\ of\ nonlinear\ algebraic\ \
+equations\ for\ this\ case . \ 
+          Solve\ the\ system\ \[IndentingNewLine]interactively, \ starting, \ 
+      for\ example, \ 
+      by\ setting\ a[1, 0]\  \[Rule] \ 
+        0. \ Two\ particular\ solutions\ are\ given\ \(\(below\)\(.\)\)\ *) \
+\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(DDESpecialSolutions[\((1 + \ v[n, t]^2)\)*\ 
+          D[v[n + 1, t], t] \[Equal] \ \((1 + v[n + 1, t]^2)\)*
+            D[v[n, t], 
+              t]\  - \ \((v[n, t] + 
+                v[n + 1, t])\)*\((v[n, t]*v[n + 1, t]\  - \ 1)\), v, n, \ 
+      t, {}, \ Verbose\  \[Rule] \ True, \ 
+      SolveAlgebraicSystem\  \[Rule] \ False]\)\(\ \)\)\)], "Input"],
+
+Cell[BoxData[
+    \("The given system of differential-difference equations: "\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{"(", 
+            InterpretationBox[
+              RowBox[{"v", "\[InvisibleSpace]", 
+                InterpretationBox[
+                  SubscriptBox["\[Null]", 
+                    
+                    InterpretationBox[\(\(1 + 
+                          n\)\[InvisibleSpace]";"\[InvisibleSpace]t\),
+                      SequenceForm[ 
+                        Plus[ 1, n], ";", t],
+                      Editable->False]],
+                  Subscript[ 
+                    SequenceForm[ 
+                      Plus[ 1, n], ";", t]],
+                  Editable->False]}],
+              SequenceForm[ v, 
+                Subscript[ 
+                  SequenceForm[ 
+                    Plus[ 1, n], ";", t]]],
+              Editable->False], ")"}], " ", \((1 + v\_n\%2)\)}], "\[Equal]", 
+        RowBox[{\(\(-\((v\_n + v\_\(1 + n\))\)\)\ \((\(-1\) + 
+                v\_n\ v\_\(1 + n\))\)\), "+", 
+          RowBox[{
+            RowBox[{"(", 
+              InterpretationBox[
+                RowBox[{"v", "\[InvisibleSpace]", 
+                  InterpretationBox[
+                    SubscriptBox["\[Null]", 
+                      
+                      InterpretationBox[\(n\[InvisibleSpace]";"\
+\[InvisibleSpace]t\),
+                        SequenceForm[ n, ";", t],
+                        Editable->False]],
+                    Subscript[ 
+                      SequenceForm[ n, ";", t]],
+                    Editable->False]}],
+                SequenceForm[ v, 
+                  Subscript[ 
+                    SequenceForm[ n, ";", t]]],
+                Editable->False], ")"}], " ", \((1 + v\_\(1 + n\)\%2)\)}]}]}],
+       "}"}]], "Print"],
+
+Cell[BoxData[
+    \("Transform the system of differential-difference equations into \
+nonlinear DDEs in T = Tanh."\)], "Print"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{\(-c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}]}], "+", 
+        RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}]}], "+", 
+        RowBox[{\(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[1 + n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}]}], "-", 
+        RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[1 + n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}]}], 
+        "-", \(\(\(u[1]\)[n]\)[T]\), "+", 
+        RowBox[{\(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[1 + n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}], 
+          " ", \(\(\(u[1]\)[n]\)[T]\^2\)}], "-", 
+        RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[1 + n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}], 
+          " ", \(\(\(u[1]\)[n]\)[T]\^2\)}], "-", \(\(\(u[1]\)[1 + n]\)[T]\), 
+        "+", \(\(\(u[1]\)[n]\)[T]\^2\ \(\(u[1]\)[1 + n]\)[T]\), "-", 
+        RowBox[{\(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}], 
+          " ", \(\(\(u[1]\)[1 + n]\)[T]\^2\)}], "+", 
+        RowBox[{\(T\^2\), " ", \(c[2]\), " ", 
+          RowBox[{
+            SuperscriptBox[\(\(u[1]\)[n]\), "\[Prime]",
+              MultilineFunction->None], "[", "T", "]"}], 
+          " ", \(\(\(u[1]\)[1 + n]\)[T]\^2\)}], 
+        "+", \(\(\(u[1]\)[n]\)[T]\ \(\(u[1]\)[1 + n]\)[T]\^2\)}], 
+      "}"}]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.160000000000025`\),
+      SequenceForm[ "Time Used:", .16000000000002501],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Determine the maximal degree of the polynomial solutions in T."\)], \
+"Print"],
+
+Cell[BoxData[
+    \({{m[1] \[Rule] 1}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.650999999999982`\),
+      SequenceForm[ "Time Used:", .65099999999998204],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("Derive the nonlinear algebraic system for the coefficients."\)], \
+"Print"],
+
+Cell[BoxData[
+    \("Seek polynomial solutions in T of the form:"\)], "Print"],
+
+Cell[BoxData[
+    \({{\(\(u[1]\)[n]\)[T] \[Rule] a[1, 0] + T\ a[1, 1]}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("where T = Tanh["\[InvisibleSpace]\(phase + n\ c[1] + 
+          t\ c[2]\)\[InvisibleSpace]"]."\),
+      SequenceForm[ "where T = Tanh[", 
+        Plus[ phase, 
+          Times[ n, 
+            c[ 1]], 
+          Times[ t, 
+            c[ 2]]], "]."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("The nonlinear algebraic system is: "\)], "Print"],
+
+Cell[BoxData[
+    \({{{a[1, 1]\^2 + 2\ a[1, 0]\ a[1, 1]\ c[2] + 
+              a[1, 0]\ a[1, 1]\ Tanh[c[1]] + c[2]\ Tanh[c[1]] + 
+              a[1, 0]\^2\ c[2]\ Tanh[c[1]] + 
+              a[1, 1]\^2\ c[2]\ Tanh[c[1]] \[Equal] 0, 
+          6\ a[1, 0]\ a[1, 1]\^2 - 3\ a[1, 1]\ Tanh[c[1]] + 
+              9\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]] + 
+              3\ a[1, 1]\^3\ Tanh[c[1]] - 2\ a[1, 0]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\^3\ Tanh[c[1]]\^2 + 
+              4\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^2 \[Equal] 0, 
+          2\ a[1, 1]\^2 + 6\ a[1, 0]\ a[1, 1]\ Tanh[c[1]] + 
+              2\ c[2]\ Tanh[c[1]] + 2\ a[1, 0]\^2\ c[2]\ Tanh[c[1]] + 
+              2\ a[1, 1]\^2\ c[2]\ Tanh[c[1]] - Tanh[c[1]]\^2 + 
+              3\ a[1, 0]\^2\ Tanh[c[1]]\^2 + a[1, 1]\^2\ Tanh[c[1]]\^2 + 
+              4\ a[1, 0]\ a[1, 1]\ c[2]\ Tanh[c[1]]\^2 \[Equal] 
+            0, \(-2\)\ a[1, 0] + 2\ a[1, 0]\^3 - a[1, 1]\ Tanh[c[1]] + 
+              3\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]] - 
+              2\ a[1, 0]\ a[1, 1]\^2\ c[2]\ Tanh[c[1]] + 
+              a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^2 - 
+              a[1, 1]\ c[2]\ Tanh[c[1]]\^2 - 
+              a[1, 0]\^2\ a[1, 1]\ c[2]\ Tanh[c[1]]\^2 - 
+              a[1, 1]\^3\ c[2]\ Tanh[c[1]]\^2 \[Equal] 
+            0, \(-2\)\ a[1, 1] + 6\ a[1, 0]\^2\ a[1, 1] - 
+              4\ a[1, 0]\ Tanh[c[1]] + 4\ a[1, 0]\^3\ Tanh[c[1]] + 
+              6\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]] - 
+              2\ a[1, 1]\ c[2]\ Tanh[c[1]] - 
+              2\ a[1, 0]\^2\ a[1, 1]\ c[2]\ Tanh[c[1]] - 
+              2\ a[1, 1]\^3\ c[2]\ Tanh[c[1]] - a[1, 1]\ Tanh[c[1]]\^2 + 
+              3\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\^3\ Tanh[c[1]]\^2 - 
+              4\ a[1, 0]\ a[1, 1]\^2\ c[2]\ Tanh[c[1]]\^2 \[Equal] 0}, {a[1, 
+            1], a[1, 0]}, {Tanh[c[1]], c[2]}, {}, {a[1, 1], Tanh[c[1]], 
+          c[2]}}}\)], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Time Used:"\[InvisibleSpace]0.5109999999999957`\),
+      SequenceForm[ "Time Used:", .51099999999999568],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \({{{a[1, 1]\^2 + 2\ a[1, 0]\ a[1, 1]\ c[2] + 
+              a[1, 0]\ a[1, 1]\ Tanh[c[1]] + c[2]\ Tanh[c[1]] + 
+              a[1, 0]\^2\ c[2]\ Tanh[c[1]] + 
+              a[1, 1]\^2\ c[2]\ Tanh[c[1]] \[Equal] 0, 
+          6\ a[1, 0]\ a[1, 1]\^2 - 3\ a[1, 1]\ Tanh[c[1]] + 
+              9\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]] + 
+              3\ a[1, 1]\^3\ Tanh[c[1]] - 2\ a[1, 0]\ Tanh[c[1]]\^2 + 
+              2\ a[1, 0]\^3\ Tanh[c[1]]\^2 + 
+              4\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^2 \[Equal] 0, 
+          2\ a[1, 1]\^2 + 6\ a[1, 0]\ a[1, 1]\ Tanh[c[1]] + 
+              2\ c[2]\ Tanh[c[1]] + 2\ a[1, 0]\^2\ c[2]\ Tanh[c[1]] + 
+              2\ a[1, 1]\^2\ c[2]\ Tanh[c[1]] - Tanh[c[1]]\^2 + 
+              3\ a[1, 0]\^2\ Tanh[c[1]]\^2 + a[1, 1]\^2\ Tanh[c[1]]\^2 + 
+              4\ a[1, 0]\ a[1, 1]\ c[2]\ Tanh[c[1]]\^2 \[Equal] 
+            0, \(-2\)\ a[1, 0] + 2\ a[1, 0]\^3 - a[1, 1]\ Tanh[c[1]] + 
+              3\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]] - 
+              2\ a[1, 0]\ a[1, 1]\^2\ c[2]\ Tanh[c[1]] + 
+              a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^2 - 
+              a[1, 1]\ c[2]\ Tanh[c[1]]\^2 - 
+              a[1, 0]\^2\ a[1, 1]\ c[2]\ Tanh[c[1]]\^2 - 
+              a[1, 1]\^3\ c[2]\ Tanh[c[1]]\^2 \[Equal] 
+            0, \(-2\)\ a[1, 1] + 6\ a[1, 0]\^2\ a[1, 1] - 
+              4\ a[1, 0]\ Tanh[c[1]] + 4\ a[1, 0]\^3\ Tanh[c[1]] + 
+              6\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]] - 
+              2\ a[1, 1]\ c[2]\ Tanh[c[1]] - 
+              2\ a[1, 0]\^2\ a[1, 1]\ c[2]\ Tanh[c[1]] - 
+              2\ a[1, 1]\^3\ c[2]\ Tanh[c[1]] - a[1, 1]\ Tanh[c[1]]\^2 + 
+              3\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]]\^2 + 
+              a[1, 1]\^3\ Tanh[c[1]]\^2 - 
+              4\ a[1, 0]\ a[1, 1]\^2\ c[2]\ Tanh[c[1]]\^2 \[Equal] 0}, {a[1, 
+            1], a[1, 0]}, {Tanh[c[1]], c[2]}, {}, {a[1, 1], Tanh[c[1]], 
+          c[2]}}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(discreteSineGordonSystemToSolve\  = \ {a[1, 1]\^2 + 
+            2\ a[1, 0]\ a[1, 1]\ c[2] + a[1, 0]\ a[1, 1]\ Tanh[c[1]] + 
+            c[2]\ Tanh[c[1]] + a[1, 0]\^2\ c[2]\ Tanh[c[1]] + 
+            a[1, 1]\^2\ c[2]\ Tanh[c[1]] \[Equal] 0, 
+        6\ a[1, 0]\ a[1, 1]\^2 - 3\ a[1, 1]\ Tanh[c[1]] + 
+            9\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]] + 3\ a[1, 1]\^3\ Tanh[c[1]] - 
+            2\ a[1, 0]\ Tanh[c[1]]\^2 + 2\ a[1, 0]\^3\ Tanh[c[1]]\^2 + 
+            4\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^2 \[Equal] 0, 
+        2\ a[1, 1]\^2 + 6\ a[1, 0]\ a[1, 1]\ Tanh[c[1]] + 
+            2\ c[2]\ Tanh[c[1]] + 2\ a[1, 0]\^2\ c[2]\ Tanh[c[1]] + 
+            2\ a[1, 1]\^2\ c[2]\ Tanh[c[1]] - Tanh[c[1]]\^2 + 
+            3\ a[1, 0]\^2\ Tanh[c[1]]\^2 + a[1, 1]\^2\ Tanh[c[1]]\^2 + 
+            4\ a[1, 0]\ a[1, 1]\ c[2]\ Tanh[c[1]]\^2 \[Equal] 
+          0, \(-2\)\ a[1, 0] + 2\ a[1, 0]\^3 - a[1, 1]\ Tanh[c[1]] + 
+            3\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]] - 
+            2\ a[1, 0]\ a[1, 1]\^2\ c[2]\ Tanh[c[1]] + 
+            a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^2 - 
+            a[1, 1]\ c[2]\ Tanh[c[1]]\^2 - 
+            a[1, 0]\^2\ a[1, 1]\ c[2]\ Tanh[c[1]]\^2 - 
+            a[1, 1]\^3\ c[2]\ Tanh[c[1]]\^2 \[Equal] 
+          0, \(-2\)\ a[1, 1] + 6\ a[1, 0]\^2\ a[1, 1] - 
+            4\ a[1, 0]\ Tanh[c[1]] + 4\ a[1, 0]\^3\ Tanh[c[1]] + 
+            6\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]] - 
+            2\ a[1, 1]\ c[2]\ Tanh[c[1]] - 
+            2\ a[1, 0]\^2\ a[1, 1]\ c[2]\ Tanh[c[1]] - 
+            2\ a[1, 1]\^3\ c[2]\ Tanh[c[1]] - a[1, 1]\ Tanh[c[1]]\^2 + 
+            3\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]]\^2 + 
+            a[1, 1]\^3\ Tanh[c[1]]\^2 - 
+            4\ a[1, 0]\ a[1, 1]\^2\ c[2]\ Tanh[c[1]]\^2 \[Equal] 
+          0}\)], "Input"],
+
+Cell[BoxData[
+    \({a[1, 1]\^2 + 2\ a[1, 0]\ a[1, 1]\ c[2] + 
+          a[1, 0]\ a[1, 1]\ Tanh[c[1]] + c[2]\ Tanh[c[1]] + 
+          a[1, 0]\^2\ c[2]\ Tanh[c[1]] + 
+          a[1, 1]\^2\ c[2]\ Tanh[c[1]] \[Equal] 0, 
+      6\ a[1, 0]\ a[1, 1]\^2 - 3\ a[1, 1]\ Tanh[c[1]] + 
+          9\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]] + 3\ a[1, 1]\^3\ Tanh[c[1]] - 
+          2\ a[1, 0]\ Tanh[c[1]]\^2 + 2\ a[1, 0]\^3\ Tanh[c[1]]\^2 + 
+          4\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^2 \[Equal] 0, 
+      2\ a[1, 1]\^2 + 6\ a[1, 0]\ a[1, 1]\ Tanh[c[1]] + 2\ c[2]\ Tanh[c[1]] + 
+          2\ a[1, 0]\^2\ c[2]\ Tanh[c[1]] + 2\ a[1, 1]\^2\ c[2]\ Tanh[c[1]] - 
+          Tanh[c[1]]\^2 + 3\ a[1, 0]\^2\ Tanh[c[1]]\^2 + 
+          a[1, 1]\^2\ Tanh[c[1]]\^2 + 
+          4\ a[1, 0]\ a[1, 1]\ c[2]\ Tanh[c[1]]\^2 \[Equal] 
+        0, \(-2\)\ a[1, 0] + 2\ a[1, 0]\^3 - a[1, 1]\ Tanh[c[1]] + 
+          3\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]] - 
+          2\ a[1, 0]\ a[1, 1]\^2\ c[2]\ Tanh[c[1]] + 
+          a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]]\^2 - a[1, 1]\ c[2]\ Tanh[c[1]]\^2 - 
+          a[1, 0]\^2\ a[1, 1]\ c[2]\ Tanh[c[1]]\^2 - 
+          a[1, 1]\^3\ c[2]\ Tanh[c[1]]\^2 \[Equal] 
+        0, \(-2\)\ a[1, 1] + 6\ a[1, 0]\^2\ a[1, 1] - 
+          4\ a[1, 0]\ Tanh[c[1]] + 4\ a[1, 0]\^3\ Tanh[c[1]] + 
+          6\ a[1, 0]\ a[1, 1]\^2\ Tanh[c[1]] - 2\ a[1, 1]\ c[2]\ Tanh[c[1]] - 
+          2\ a[1, 0]\^2\ a[1, 1]\ c[2]\ Tanh[c[1]] - 
+          2\ a[1, 1]\^3\ c[2]\ Tanh[c[1]] - a[1, 1]\ Tanh[c[1]]\^2 + 
+          3\ a[1, 0]\^2\ a[1, 1]\ Tanh[c[1]]\^2 + a[1, 1]\^3\ Tanh[c[1]]\^2 - 
+          4\ a[1, 0]\ a[1, 1]\^2\ c[2]\ Tanh[c[1]]\^2 \[Equal] 0}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(solutionCandidate1\  = \ {a[1, 1]\  \[Rule] \ 1, \ 
+        a[1, 0]\  \[Rule] \ 0, \ 
+        c[2]\  \[Rule] \ \(-\((1/2)\)\)*Coth[c[1]]}\)], "Input"],
+
+Cell[BoxData[
+    \({a[1, 1] \[Rule] 1, a[1, 0] \[Rule] 0, 
+      c[2] \[Rule] \(-\(1\/2\)\)\ Coth[c[1]]}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(test1\  = \ 
+      Map[Factor, \ 
+        discreteSineGordonSystemToSolve\ \  /. \ 
+          solutionCandidate1]\)], "Input"],
+
+Cell[BoxData[
+    \({True, True, True, True, True}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(solutionCandidate2\  = \ {a[1, 1]\  \[Rule] \ \(-1\), \ 
+        a[1, 0]\  \[Rule] \ 0, \ 
+        c[2]\  \[Rule] \ \(-\((1/2)\)\)*Coth[c[1]]}\)], "Input"],
+
+Cell[BoxData[
+    \({a[1, 1] \[Rule] \(-1\), a[1, 0] \[Rule] 0, 
+      c[2] \[Rule] \(-\(1\/2\)\)\ Coth[c[1]]}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(test2\  = \ 
+      Map[Factor, \ 
+        discreteSineGordonSystemToSolve\ \  /. \ 
+          solutionCandidate2]\)], "Input"],
+
+Cell[BoxData[
+    \({True, True, True, True, True}\)], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Presentation",
+WindowSize->{1272, 907},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Info3441887448-8744311"->{
+    Cell[2946, 96, 396, 6, 74, "Print",
+      CellTags->"Info3441887448-8744311"],
+    Cell[3345, 104, 933, 21, 95, "Print",
+      CellTags->"Info3441887448-8744311"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Info3441887448-8744311", 106253, 2543}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 127, 2, 38, "Input"],
+Cell[1884, 55, 248, 5, 61, "Input"],
+
+Cell[CellGroupData[{
+Cell[2157, 64, 80, 1, 38, "Input"],
+Cell[2240, 67, 63, 1, 38, "Output"]
+}, Open  ]],
+Cell[2318, 71, 143, 2, 38, "Input"],
+
+Cell[CellGroupData[{
+Cell[2486, 77, 81, 1, 38, "Input"],
+Cell[2570, 80, 91, 1, 28, "Print"],
+Cell[2664, 83, 101, 2, 28, "Print"],
+Cell[2768, 87, 81, 1, 28, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2886, 93, 57, 1, 38, "Input"],
+Cell[2946, 96, 396, 6, 74, "Print",
+  CellTags->"Info3441887448-8744311"],
+Cell[3345, 104, 933, 21, 95, "Print",
+  CellTags->"Info3441887448-8744311"]
+}, Open  ]],
+Cell[4293, 128, 327, 6, 84, "Input"],
+Cell[4623, 136, 65, 1, 38, "Input"],
+
+Cell[CellGroupData[{
+Cell[4713, 141, 244, 5, 61, "Input"],
+Cell[4960, 148, 66, 1, 28, "Print"],
+Cell[5029, 151, 67, 1, 28, "Print"],
+Cell[5099, 154, 116, 3, 26, "Message"],
+Cell[5218, 159, 269, 6, 61, "Output"]
+}, Open  ]],
+Cell[5502, 168, 280, 6, 61, "Input"],
+
+Cell[CellGroupData[{
+Cell[5807, 178, 288, 5, 61, "Input"],
+Cell[6098, 185, 90, 1, 28, "Print"],
+Cell[6191, 188, 1519, 40, 28, "Print"],
+Cell[7713, 230, 127, 2, 28, "Print"],
+Cell[7843, 234, 1215, 27, 52, "Print"],
+Cell[9061, 263, 180, 3, 28, "Print"],
+Cell[9244, 268, 99, 2, 28, "Print"],
+Cell[9346, 272, 493, 7, 97, "Message"],
+Cell[9842, 281, 493, 7, 97, "Message"],
+Cell[10338, 290, 67, 1, 28, "Print"],
+Cell[10408, 293, 178, 3, 28, "Print"],
+Cell[10589, 298, 96, 2, 28, "Print"],
+Cell[10688, 302, 78, 1, 28, "Print"],
+Cell[10769, 305, 171, 3, 29, "Print"],
+Cell[10943, 310, 323, 9, 28, "Print"],
+Cell[11269, 321, 70, 1, 28, "Print"],
+Cell[11342, 324, 814, 14, 120, "Print"],
+Cell[12159, 340, 179, 3, 28, "Print"],
+Cell[12341, 345, 72, 1, 28, "Print"],
+Cell[12416, 348, 516, 8, 101, "Print"],
+Cell[12935, 358, 178, 3, 28, "Print"],
+Cell[13116, 363, 80, 1, 28, "Print"],
+Cell[13199, 366, 92, 1, 28, "Print"],
+Cell[13294, 369, 595, 9, 97, "Print"],
+Cell[13892, 380, 66, 1, 28, "Print"],
+Cell[13961, 383, 67, 1, 28, "Print"],
+Cell[14031, 386, 116, 3, 26, "Message"],
+Cell[14150, 391, 595, 9, 97, "Print"],
+Cell[14748, 402, 154, 3, 28, "Print"],
+Cell[14905, 407, 45, 1, 28, "Print"],
+Cell[14953, 410, 90, 1, 28, "Print"],
+Cell[15046, 413, 596, 9, 107, "Output"]
+}, Open  ]],
+Cell[15657, 425, 238, 5, 61, "Input"],
+
+Cell[CellGroupData[{
+Cell[15920, 434, 400, 7, 84, "Input"],
+Cell[16323, 443, 90, 1, 28, "Print"],
+Cell[16416, 446, 1503, 41, 28, "Print"],
+Cell[17922, 489, 127, 2, 28, "Print"],
+Cell[18052, 493, 1357, 29, 75, "Print"],
+Cell[19412, 524, 177, 3, 28, "Print"],
+Cell[19592, 529, 99, 2, 28, "Print"],
+Cell[19694, 533, 484, 7, 97, "Message"],
+Cell[20181, 542, 484, 7, 97, "Message"],
+Cell[20668, 551, 67, 1, 28, "Print"],
+Cell[20738, 554, 178, 3, 28, "Print"],
+Cell[20919, 559, 96, 2, 28, "Print"],
+Cell[21018, 563, 78, 1, 28, "Print"],
+Cell[21099, 566, 155, 3, 28, "Print"],
+Cell[21257, 571, 323, 9, 28, "Print"],
+Cell[21583, 582, 70, 1, 28, "Print"],
+Cell[21656, 585, 1062, 18, 166, "Print"],
+Cell[22721, 605, 178, 3, 28, "Print"],
+Cell[22902, 610, 72, 1, 28, "Print"],
+Cell[22977, 613, 292, 5, 47, "Print"],
+Cell[23272, 620, 178, 3, 28, "Print"],
+Cell[23453, 625, 80, 1, 28, "Print"],
+Cell[23536, 628, 92, 1, 28, "Print"],
+Cell[23631, 631, 308, 6, 91, "Print"],
+Cell[23942, 639, 66, 1, 28, "Print"],
+Cell[24011, 642, 67, 1, 28, "Print"],
+Cell[24081, 645, 308, 6, 91, "Print"],
+Cell[24392, 653, 177, 3, 28, "Print"],
+Cell[24572, 658, 45, 1, 28, "Print"],
+Cell[24620, 661, 90, 1, 28, "Print"],
+Cell[24713, 664, 309, 6, 101, "Output"]
+}, Open  ]],
+Cell[25037, 673, 165, 2, 38, "Input"],
+
+Cell[CellGroupData[{
+Cell[25227, 679, 1031, 25, 87, "Input"],
+Cell[26261, 706, 260, 4, 51, "Message"],
+Cell[26524, 712, 66, 1, 28, "Print"],
+Cell[26593, 715, 67, 1, 28, "Print"],
+Cell[26663, 718, 309, 6, 101, "Output"]
+}, Open  ]],
+Cell[26987, 727, 61, 1, 38, "Input"],
+Cell[27051, 730, 163, 3, 38, "Input"],
+
+Cell[CellGroupData[{
+Cell[27239, 737, 284, 5, 61, "Input"],
+Cell[27526, 744, 66, 1, 28, "Print"],
+Cell[27595, 747, 67, 1, 28, "Print"],
+Cell[27665, 750, 164, 3, 71, "Output"]
+}, Open  ]],
+Cell[27844, 756, 220, 5, 61, "Input"],
+
+Cell[CellGroupData[{
+Cell[28089, 765, 303, 6, 61, "Input"],
+Cell[28395, 773, 551, 8, 107, "Output"]
+}, Open  ]],
+Cell[28961, 784, 230, 4, 61, "Input"],
+
+Cell[CellGroupData[{
+Cell[29216, 792, 290, 5, 61, "Input"],
+Cell[29509, 799, 564, 8, 97, "Message"],
+Cell[30076, 809, 573, 8, 97, "Message"],
+Cell[30652, 819, 66, 1, 28, "Print"],
+Cell[30721, 822, 230, 4, 44, "Message"],
+Cell[30954, 828, 450, 9, 51, "Print"],
+Cell[31407, 839, 67, 1, 28, "Print"],
+Cell[31477, 842, 147, 3, 44, "Message"],
+Cell[31627, 847, 462, 8, 78, "Print"],
+Cell[32092, 857, 242, 5, 38, "Output"]
+}, Open  ]],
+Cell[32349, 865, 220, 4, 61, "Input"],
+
+Cell[CellGroupData[{
+Cell[32594, 873, 225, 4, 61, "Input"],
+Cell[32822, 879, 66, 1, 28, "Print"],
+Cell[32891, 882, 67, 1, 28, "Print"],
+Cell[32961, 885, 260, 5, 38, "Output"]
+}, Open  ]],
+Cell[33236, 893, 62, 1, 38, "Input"],
+
+Cell[CellGroupData[{
+Cell[33323, 898, 402, 6, 107, "Input"],
+Cell[33728, 906, 824, 12, 156, "Message"],
+Cell[34555, 920, 815, 12, 156, "Message"],
+Cell[35373, 934, 66, 1, 28, "Print"],
+Cell[35442, 937, 67, 1, 28, "Print"],
+Cell[35512, 940, 715, 14, 161, "Output"]
+}, Open  ]],
+Cell[36242, 957, 103, 2, 38, "Input"],
+
+Cell[CellGroupData[{
+Cell[36370, 963, 425, 7, 107, "Input"],
+Cell[36798, 972, 90, 1, 28, "Print"],
+Cell[36891, 975, 1605, 43, 28, "Print"],
+Cell[38499, 1020, 127, 2, 28, "Print"],
+Cell[38629, 1024, 1538, 33, 98, "Print"],
+Cell[40170, 1059, 178, 3, 28, "Print"],
+Cell[40351, 1064, 99, 2, 28, "Print"],
+Cell[40453, 1068, 110, 2, 28, "Print"],
+Cell[40566, 1072, 178, 3, 28, "Print"],
+Cell[40747, 1077, 96, 2, 28, "Print"],
+Cell[40846, 1081, 78, 1, 28, "Print"],
+Cell[40927, 1084, 309, 5, 51, "Print"],
+Cell[41239, 1091, 323, 9, 28, "Print"],
+Cell[41565, 1102, 70, 1, 28, "Print"],
+Cell[41638, 1105, 12461, 209, 1846, "Print"],
+Cell[54102, 1316, 178, 3, 28, "Print"],
+Cell[54283, 1321, 72, 1, 28, "Print"],
+Cell[54358, 1324, 826, 12, 156, "Message"],
+Cell[55187, 1338, 815, 11, 156, "Message"],
+Cell[56005, 1351, 473, 8, 99, "Print"],
+Cell[56481, 1361, 177, 3, 28, "Print"],
+Cell[56661, 1366, 80, 1, 28, "Print"],
+Cell[56744, 1369, 92, 1, 28, "Print"],
+Cell[56839, 1372, 700, 14, 151, "Print"],
+Cell[57542, 1388, 66, 1, 28, "Print"],
+Cell[57611, 1391, 67, 1, 28, "Print"],
+Cell[57681, 1394, 696, 14, 151, "Print"],
+Cell[58380, 1410, 178, 3, 28, "Print"],
+Cell[58561, 1415, 45, 1, 28, "Print"],
+Cell[58609, 1418, 90, 1, 28, "Print"],
+Cell[58702, 1421, 697, 14, 161, "Output"]
+}, Open  ]],
+Cell[59414, 1438, 109, 2, 38, "Input"],
+
+Cell[CellGroupData[{
+Cell[59548, 1444, 438, 8, 107, "Input"],
+Cell[59989, 1454, 906, 13, 156, "Message"],
+Cell[60898, 1469, 897, 13, 156, "Message"],
+Cell[61798, 1484, 66, 1, 28, "Print"],
+Cell[61867, 1487, 67, 1, 28, "Print"],
+Cell[61937, 1490, 713, 14, 161, "Output"]
+}, Open  ]],
+Cell[62665, 1507, 89, 1, 38, "Input"],
+
+Cell[CellGroupData[{
+Cell[62779, 1512, 209, 4, 61, "Input"],
+Cell[62991, 1518, 66, 1, 28, "Print"],
+Cell[63060, 1521, 269, 5, 62, "Output"]
+}, Open  ]],
+Cell[63344, 1529, 262, 4, 61, "Input"],
+
+Cell[CellGroupData[{
+Cell[63631, 1537, 393, 7, 84, "Input"],
+Cell[64027, 1546, 141, 2, 28, "Message"],
+Cell[64171, 1550, 141, 2, 28, "Message"],
+Cell[64315, 1554, 66, 1, 28, "Print"],
+Cell[64384, 1557, 1902, 32, 609, "Output"]
+}, Open  ]],
+Cell[66301, 1592, 262, 5, 61, "Input"],
+
+Cell[CellGroupData[{
+Cell[66588, 1601, 251, 5, 61, "Input"],
+Cell[66842, 1608, 90, 1, 28, "Print"],
+Cell[66935, 1611, 727, 20, 30, "Print"],
+Cell[67665, 1633, 127, 2, 28, "Print"],
+Cell[67795, 1637, 649, 15, 52, "Print"],
+Cell[68447, 1654, 177, 3, 28, "Print"],
+Cell[68627, 1659, 99, 2, 28, "Print"],
+Cell[68729, 1663, 69, 1, 28, "Print"],
+Cell[68801, 1666, 177, 3, 28, "Print"],
+Cell[68981, 1671, 96, 2, 28, "Print"],
+Cell[69080, 1675, 78, 1, 28, "Print"],
+Cell[69161, 1678, 173, 3, 29, "Print"],
+Cell[69337, 1683, 323, 9, 28, "Print"],
+Cell[69663, 1694, 70, 1, 28, "Print"],
+Cell[69736, 1697, 2964, 50, 397, "Print"],
+Cell[72703, 1749, 178, 3, 28, "Print"],
+Cell[72884, 1754, 72, 1, 28, "Print"],
+Cell[72959, 1757, 241, 4, 28, "Print"],
+Cell[73203, 1763, 177, 3, 28, "Print"],
+Cell[73383, 1768, 80, 1, 28, "Print"],
+Cell[73466, 1771, 92, 1, 28, "Print"],
+Cell[73561, 1774, 250, 5, 51, "Print"],
+Cell[73814, 1781, 66, 1, 28, "Print"],
+Cell[73883, 1784, 246, 5, 28, "Print"],
+Cell[74132, 1791, 181, 3, 28, "Print"],
+Cell[74316, 1796, 45, 1, 28, "Print"],
+Cell[74364, 1799, 90, 1, 28, "Print"],
+Cell[74457, 1802, 247, 5, 38, "Output"]
+}, Open  ]],
+Cell[74719, 1810, 226, 3, 61, "Input"],
+
+Cell[CellGroupData[{
+Cell[74970, 1817, 276, 6, 61, "Input"],
+Cell[75249, 1825, 90, 1, 28, "Print"],
+Cell[75342, 1828, 740, 20, 30, "Print"],
+Cell[76085, 1850, 127, 2, 28, "Print"],
+Cell[76215, 1854, 790, 17, 52, "Print"],
+Cell[77008, 1873, 180, 3, 28, "Print"],
+Cell[77191, 1878, 99, 2, 28, "Print"],
+Cell[77293, 1882, 69, 1, 28, "Print"],
+Cell[77365, 1885, 178, 3, 28, "Print"],
+Cell[77546, 1890, 96, 2, 28, "Print"],
+Cell[77645, 1894, 78, 1, 28, "Print"],
+Cell[77726, 1897, 173, 3, 29, "Print"],
+Cell[77902, 1902, 323, 9, 28, "Print"],
+Cell[78228, 1913, 70, 1, 28, "Print"],
+Cell[78301, 1916, 4199, 72, 581, "Print"],
+Cell[82503, 1990, 177, 3, 28, "Print"],
+Cell[82683, 1995, 72, 1, 28, "Print"],
+Cell[82758, 1998, 1345, 22, 406, "Print"],
+Cell[84106, 2022, 176, 3, 28, "Print"],
+Cell[84285, 2027, 80, 1, 28, "Print"],
+Cell[84368, 2030, 92, 1, 28, "Print"],
+Cell[84463, 2033, 1180, 19, 332, "Print"],
+Cell[85646, 2054, 66, 1, 28, "Print"],
+Cell[85715, 2057, 1180, 19, 332, "Print"],
+Cell[86898, 2078, 178, 3, 28, "Print"],
+Cell[87079, 2083, 45, 1, 28, "Print"],
+Cell[87127, 2086, 90, 1, 28, "Print"],
+Cell[87220, 2089, 1181, 19, 342, "Output"]
+}, Open  ]],
+Cell[88416, 2111, 85, 1, 38, "Input"],
+
+Cell[CellGroupData[{
+Cell[88526, 2116, 238, 5, 61, "Input"],
+Cell[88767, 2123, 66, 1, 28, "Print"],
+Cell[88836, 2126, 67, 1, 28, "Print"],
+Cell[88906, 2129, 194, 4, 75, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[89137, 2138, 288, 5, 84, "Input"],
+Cell[89428, 2145, 493, 7, 97, "Message"],
+Cell[89924, 2154, 493, 7, 97, "Message"],
+Cell[90420, 2163, 66, 1, 28, "Print"],
+Cell[90489, 2166, 67, 1, 28, "Print"],
+Cell[90559, 2169, 463, 8, 175, "Output"]
+}, Open  ]],
+Cell[91037, 2180, 458, 9, 84, "Input"],
+
+Cell[CellGroupData[{
+Cell[91520, 2193, 381, 7, 84, "Input"],
+Cell[91904, 2202, 90, 1, 28, "Print"],
+Cell[91997, 2205, 1731, 44, 30, "Print"],
+Cell[93731, 2251, 127, 2, 28, "Print"],
+Cell[93861, 2255, 1900, 42, 75, "Print"],
+Cell[95764, 2299, 177, 3, 28, "Print"],
+Cell[95944, 2304, 99, 2, 28, "Print"],
+Cell[96046, 2308, 51, 1, 28, "Print"],
+Cell[96100, 2311, 177, 3, 28, "Print"],
+Cell[96280, 2316, 96, 2, 28, "Print"],
+Cell[96379, 2320, 78, 1, 28, "Print"],
+Cell[96460, 2323, 84, 1, 28, "Print"],
+Cell[96547, 2326, 323, 9, 28, "Print"],
+Cell[96873, 2337, 70, 1, 28, "Print"],
+Cell[96946, 2340, 1893, 32, 282, "Print"],
+Cell[98842, 2374, 178, 3, 28, "Print"],
+Cell[99023, 2379, 1894, 32, 292, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[100954, 2416, 1770, 30, 302, "Input"],
+Cell[102727, 2448, 1633, 26, 269, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[104397, 2479, 170, 3, 38, "Input"],
+Cell[104570, 2484, 119, 2, 54, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[104726, 2491, 146, 4, 38, "Input"],
+Cell[104875, 2497, 64, 1, 38, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[104976, 2503, 175, 3, 38, "Input"],
+Cell[105154, 2508, 124, 2, 54, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[105315, 2515, 146, 4, 38, "Input"],
+Cell[105464, 2521, 64, 1, 38, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+
